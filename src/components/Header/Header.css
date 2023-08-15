@@ -1,0 +1,18 @@
+.header {
+    padding: 0 100px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #60675B;
+}
+
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header__container a:first-child {
+    flex-basis: 50%;
+}
