@@ -1,5 +1,11 @@
 import React, {ChangeEvent, FC, FormEvent, useState} from "react";
 import axios from "axios";
+import {Button, Form} from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux";
+import Loader from "../../components/Loader/Loader";
+import allActions from "../../redux/actions/allActions";
+import IUser from "../../models/user";
+import {useNavigate} from "react-router-dom";
 
 const Signup: FC = () => {
     const [values, setValues] = useState({
@@ -9,6 +15,11 @@ const Signup: FC = () => {
         country: '',
     });
     const [submitted, setSubmitted] = useState(false);
+    const [validated, setValidated] = useState(false);
+
+    const dispatch = useDispatch();
+    const isLoading = useSelector((state: any) => state.loaderReducer.isLoading);
+    const navigate = useNavigate();
 
     const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setValues((values) => ({
@@ -40,71 +51,79 @@ const Signup: FC = () => {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        axios.post('https://localhost:5001/sign-up', values)
+        dispatch(allActions.loaderActions.showLoader());
+        axios.post('http://localhost:5001/signup', values)
             .then(response => {
+                dispatch(allActions.loaderActions.hideLoader());
                 console.log("Status: ", response.status);
                 console.log("Data: ", response.data);
-            }).catch(error => {
-            console.error('Something went wrong!', error);
+                const user: IUser = {
+                    name: values.login,
+                }
+                dispatch(allActions.userActions.setUser(user));
+                navigate("/");
+            })
+            .catch(error => {
+                dispatch(allActions.loaderActions.hideLoader());
+                console.error('Something went wrong!', error);
         });
+        setValidated(true);
         setSubmitted(true);
     }
 
     return (
         <div className="page">
             <div className="page__container">
-                <form className="page__form" onSubmit={handleSubmit}>
+                { isLoading ? <Loader /> : null }
+                <Form noValidate validated={validated} className="page__form" onSubmit={handleSubmit}>
                     <h3 className="page__headline">Sign up</h3>
-                    <label className="page__label">
-                        <p className="page__label-text">Email</p>
-                        <input
-                            type="text"
+                    <Form.Group controlId="validationCustom01">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
                             className="page__input page__input--email"
+                            required
+                            type="email"
                             placeholder="Enter your email"
                             value={values.email}
                             onChange={handleEmailInputChange}
+
                         />
-                    </label>
-                    <label className="page__label">
-                        <p className="page__label-text">Country</p>
-                        <input
-                            type="text"
+                    </Form.Group>
+                    <Form.Group controlId="validationCustom02">
+                        <Form.Label>Country</Form.Label>
+                        <Form.Control
                             className="page__input page__input--telephone"
+                            required
+                            type="text"
                             placeholder="Enter your country"
                             value={values.country}
                             onChange={handleCountryInputChange}
                         />
-                    </label>
-                    <label className="page__label">
-                        <p className="page__label-text">Login</p>
-                        <input
-                            type="text"
+                    </Form.Group>
+                    <Form.Group controlId="validationCustom03">
+                        <Form.Label>Login</Form.Label>
+                        <Form.Control
                             className="page__input page__input--name"
+                            required
+                            type="text"
                             placeholder="Enter your login"
                             value={values.login}
                             onChange={handleLoginInputChange}
                         />
-                    </label>
-                    <label className="page__label">
-                        <p className="page__label-text">Password</p>
-                        <input
-                            type="text"
-                            className="page__input page__input--password"
+                    </Form.Group>
+                    <Form.Group controlId="validationCustom04">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
+                            className="page__input page__input--password-check"
+                            required
+                            type="password"
                             placeholder="Enter your password"
                             value={values.password}
                             onChange={handlePasswordInputChange}
                         />
-                    </label>
-                    <label className="page__label">
-                        <p className="page__label-text">Password check</p>
-                        <input
-                            type="text"
-                            className="page__input page__input--password-check"
-                            placeholder="Enter your password again"
-                        />
-                    </label>
-                    <input type="submit" className="page__button button-cta" value="Sign up" />
-                </form>
+                    </Form.Group>
+                    <Button type="submit" className="page__button button-cta">Submit</Button>
+                </Form>
             </div>
         </div>
     );

@@ -1,5 +1,9 @@
-import {ChangeEvent, FC, FormEvent, useState} from "react";
+import React, {ChangeEvent, FC, FormEvent, useState} from "react";
 import axios from "axios";
+import {useDispatch, useSelector} from "react-redux";
+import Loader from "../../components/Loader/Loader";
+import {Button, Form} from "react-bootstrap";
+import allActions from "../../redux/actions/allActions";
 
 const Enlist: FC = () => {
     const [values, setValues] = useState({
@@ -7,8 +11,12 @@ const Enlist: FC = () => {
         description: '',
         rules: '',
         address: '',
+        price: '',
     });
-    const [submitted, setSubmitted] = useState(false);
+    const [validated, setValidated] = useState(false);
+
+    const dispatch = useDispatch();
+    const isLoading = useSelector((state: any) => state.loaderReducer.isLoading);
 
     const handleNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setValues((values) => ({
@@ -38,63 +46,92 @@ const Enlist: FC = () => {
         }));
     };
 
+    const handlePriceInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setValues((values) => ({
+            ...values,
+            price: event.target.value,
+        }));
+    };
+
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        axios.post('https://localhost:5001/create-house', values)
+        dispatch(allActions.loaderActions.showLoader());
+        axios.post('http://localhost:5001/createHouse', values)
             .then(response => {
+                dispatch(allActions.loaderActions.hideLoader());
                 console.log("Status: ", response.status);
                 console.log("Data: ", response.data);
-            }).catch(error => {
-            console.error('Something went wrong!', error);
+            })
+            .catch(error => {
+                dispatch(allActions.loaderActions.hideLoader());
+                console.error('Something went wrong!', error);
         });
-        setSubmitted(true);
+        setValidated(true);
     }
 
     return (
         <div className="page">
             <div className="page__container">
-                <form className="page__form" onSubmit={handleSubmit}>
+                { isLoading ? <Loader /> : null }
+                <Form noValidate validated={validated} className="page__form" onSubmit={handleSubmit}>
                     <h3 className="page__headline">Enlist your house</h3>
-                    <label className="page__label">
-                        <p className="page__label-text">Name</p>
-                        <input
+                    <Form.Group controlId="validationCustom01">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control
+                            className="page__input page__input--email"
+                            required
                             type="text"
-                            className="page__input page__input--wide"
                             placeholder="Enter your house name"
                             value={values.name}
                             onChange={handleNameInputChange}
                         />
-                    </label>
-                    <label className="page__label">
-                        <p className="page__label-text">Description</p>
-                        <input
-                            className="page__input"
+                    </Form.Group>
+                    <Form.Group controlId="validationCustom01">
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control
+                            className="page__input page__input--email"
+                            required
+                            type="text"
                             placeholder="Write a short description of your house"
                             value={values.description}
                             onChange={handleDescriptionInputChange}
                         />
-                    </label>
-                    <label className="page__label">
-                        <p className="page__label-text">Rules</p>
-                        <input
-                            className="page__input"
+                    </Form.Group>
+                    <Form.Group controlId="validationCustom01">
+                        <Form.Label>Rules</Form.Label>
+                        <Form.Control
+                            className="page__input page__input--email"
+                            required
+                            type="text"
                             placeholder="Specify some rules for your guests"
                             value={values.rules}
                             onChange={handleRulesInputChange}
                         />
-                    </label>
-                    <label className="page__label">
-                        <p className="page__label-text">Address</p>
-                        <input
+                    </Form.Group>
+                    <Form.Group controlId="validationCustom01">
+                        <Form.Label>Address</Form.Label>
+                        <Form.Control
+                            className="page__input page__input--email"
+                            required
                             type="text"
-                            className="page__input page__input--wide"
                             placeholder="Enter your address"
                             value={values.address}
                             onChange={handleAddressInputChange}
                         />
-                    </label>
-                    <input type="submit" className="page__button button-cta" value="Enlist"/>
-                </form>
+                    </Form.Group>
+                    <Form.Group controlId="validationCustom01">
+                        <Form.Label>Price</Form.Label>
+                        <Form.Control
+                            className="page__input page__input--email"
+                            required
+                            type="number"
+                            placeholder="Set your daily price"
+                            value={values.price}
+                            onChange={handlePriceInputChange}
+                        />
+                    </Form.Group>
+                    <Button type="submit" className="page__button button-cta">Submit</Button>
+                </Form>
             </div>
         </div>
     );

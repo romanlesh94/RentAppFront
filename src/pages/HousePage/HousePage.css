@@ -1,0 +1,73 @@
+.housepage__wrapper {
+    padding: 0 100px;
+}
+.housepage__namebox {
+    padding: 0 100px;
+    height: 70px;
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+}
+.housepage__name {
+    color: #60675B;
+    margin: 0;
+    font-size: 24px;
+}
+.housepage__container {
+    padding: 25px 0;
+    display: flex;
+}
+.housepage__carousel {
+    border-radius: 5px;
+    flex-basis: 65%;
+    height: 450px;
+    margin-right: 25px;
+}
+.housepage__carousel-item {
+    border-radius: 5px;
+    height: 450px;
+}
+.housepage__photo {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.housepage__booking {
+    border-radius: 5px;
+    padding: 45px;
+    flex-basis: 35%;
+    background-color: #F8ECCE;
+}
+.housepage__title {
+    margin-bottom: 5px;
+    color: #000;
+    font-size: 20px;
+    font-weight: 500;
+}
+.housepage__list-item {
+    font-size: 14px;
+    color: #60675B;
+}
+.housepage__list-item:last-child{
+    margin-bottom: 15px;
+}
+.housepage__text {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #60675B;
+    padding-left: 20px;
+}
+.housepage__button {
+    width: 100%;
+    border-radius: 5px;
+    height: 50px;
+    border: none;
+    margin-top: 15px;
+}
+.housepage__description-text {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #60675B;
+}
+

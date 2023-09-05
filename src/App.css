@@ -1,6 +1,8 @@
 @import 'components/Header/Header.css';
 @import 'components/Search/Search.css';
 @import 'pages/PagesStyles.css';
+@import 'components/Loader/Loader.css';
+@import 'pages/HousePage/HousePage.css';
 
 
 body {
@@ -15,6 +17,13 @@ a {
 p {
     margin: 0;
 }
+ul {
+    margin: 0;
+    padding: 0 0 0 20px;
+}
+li {
+    list-style: none;
+}
 .button-cta {
     background: #F7944E;
     margin-right: 0;
@@ -23,3 +32,4 @@ p {
 .button-cta:hover {
     background: #FCA669;
 }
+

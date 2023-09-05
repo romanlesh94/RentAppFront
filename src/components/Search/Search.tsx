@@ -1,8 +1,10 @@
 import {FC, useState} from "react";
 
-const Enlist: FC = () => {
+const Enlist = () => {
+    const [minimize, setMinimize] = useState(false);
+
     return (
-        <div className="search">
+        <div className={ minimize == false ? "search" : "search--minimized"}>
             <div className="search__container">
                 <div className="search__bar">
                     <input type="text" className="search__input" placeholder="Where are you going?"/>

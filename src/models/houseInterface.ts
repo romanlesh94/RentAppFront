@@ -3,4 +3,5 @@ export default interface IHouse {
     description: string,
     rules: string,
     address: string,
+    price: number,
 }

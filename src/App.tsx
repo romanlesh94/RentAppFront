@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import Header from "./components/Header/Header";
 import {Route, Routes } from 'react-router-dom';
@@ -7,6 +8,8 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import Enlist from "./pages/Enlist/Enlist";
 import HouseList from "./pages/HouseList/HouseList";
+import HousePage from "./pages/HousePage/HousePage";
+
 
 function App() {
   return (
@@ -19,6 +22,7 @@ function App() {
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/enlist" element={<Enlist />} />
                   <Route path="/houselist" element={<HouseList />} />
+                  <Route path="/housepage" element={<HousePage />} />
               </Routes>
           </div>
       </div>

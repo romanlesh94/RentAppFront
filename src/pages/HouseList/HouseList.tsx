@@ -1,15 +1,15 @@
 import {FC, useEffect, useState} from "react";
 import Search from "../../components/Search/Search";
 import axios from "axios";
-import IHouse from "../../models/house-interface";
+import IHouse from "../../models/houseInterface";
 import HouseCard from "../../components/HouseCard/HouseCard";
 
 const HouseList: FC = () => {
     const [houses, setHouses] = useState([]);
 
     const getHouses = () => {
-        axios.get('https://localhost:5001/get-houses').then(response => {
-            setHouses(response.data);
+        axios.get('http://localhost:5001/getHouses/pageIndex/1/pageSize/15').then(response => {
+            setHouses(response.data.items);
         }).catch(error => {
             console.error("Something went wrong", error);
         });
@@ -29,6 +29,7 @@ const HouseList: FC = () => {
                         description={house.description}
                         rules={house.rules}
                         address={house.address}
+                        price={house.price}
                     />
                 )
             }
