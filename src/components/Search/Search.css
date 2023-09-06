@@ -44,6 +44,23 @@
 .search__form-button:hover {
     background-color: #9CA777;
 }
-
+.react-datepicker-wrapper {
+    height: 100%;
+}
+.react-datepicker__input-container {
+    height: 100%;
+}
+.react-datepicker__input-container input {
+    background-color: #7C9070;
+    color: #fff;
+    border: none;
+    height: 100%;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.react-datepicker {
+    background-color: #fff;
+}
 
 

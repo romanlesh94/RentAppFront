@@ -109,5 +109,18 @@
 .housecard__currency {
     font-size: 14px;
 }
-
+.pagination {
+    justify-content: center;
+    margin: 30px 0;
+}
+.pagination a {
+    color: #60675B;
+}
+.pagination a:hover {
+    color: #60675B;
+}
+.active > .page-link{
+    border-color: #F7944E;
+    background-color: #F7944E;
+}
 
