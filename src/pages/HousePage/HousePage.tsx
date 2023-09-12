@@ -4,8 +4,11 @@ import house01 from "../../assets/house01.jpg";
 import house02 from "../../assets/house02.jpg";
 import house03 from "../../assets/house03.jpg";
 import {Carousel} from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const HousePage: FC = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="housepage">
             <Search />
@@ -47,7 +50,7 @@ const HousePage: FC = () => {
                             <p className="housepage__title">Transfer</p>
                             <p className="housepage__text">Transfer from the airport is possible, but not included</p>
                         </div>
-                        <button className="housepage__button button-cta">Book</button>
+                        <button onClick={() => {navigate("/booking")}} className="housepage__button button-cta">Book</button>
                     </div>
                 </div>
                 <div className="housepage__description">

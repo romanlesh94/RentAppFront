@@ -3,6 +3,9 @@
 @import 'pages/PagesStyles.css';
 @import 'components/Loader/Loader.css';
 @import 'pages/HousePage/HousePage.css';
+@import 'pages/Trips/Trips.css';
+@import 'pages/MyHouses/MyHouses.css';
+@import 'pages/Booking/Booking.css';
 
 body {
     font-family: Roboto;

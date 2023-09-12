@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'react-calendar/dist/Calendar.css';
 import "react-datepicker/dist/react-datepicker.css";
 import './App.css';
 import Header from "./components/Header/Header";
@@ -10,6 +11,9 @@ import Signup from "./pages/Signup/Signup";
 import Enlist from "./pages/Enlist/Enlist";
 import HousePage from "./pages/HousePage/HousePage";
 import UserUpdate from "./pages/UserUpdate/UserUpdate";
+import Trips from "./pages/Trips/Trips";
+import MyHouses from "./pages/MyHouses/MyHouses";
+import Booking from "./pages/Booking/Booking";
 
 
 function App() {
@@ -24,6 +28,9 @@ function App() {
                   <Route path="/enlist" element={<Enlist />} />
                   <Route path="/housepage" element={<HousePage />} />
                   <Route path="/userUpdate" element={<UserUpdate />} />
+                  <Route path="/trips" element={<Trips />} />
+                  <Route path="/myhouses" element={<MyHouses />} />
+                  <Route path="/booking" element={<Booking />} />
               </Routes>
           </div>
       </div>

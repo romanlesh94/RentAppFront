@@ -4,7 +4,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import allActions from "../../redux/actions/allActions";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBookmark, faComment, faRightFromBracket, faSuitcase, faUserPen} from "@fortawesome/free-solid-svg-icons";
+import {
+    faBookmark,
+    faComment,
+    faHouseChimney,
+    faRightFromBracket,
+    faSuitcase,
+    faUserPen
+} from "@fortawesome/free-solid-svg-icons";
 
 const UserMenu = () => {
 
@@ -34,10 +41,20 @@ const UserMenu = () => {
                         </Link>
                     </Dropdown.Item>
                     <Dropdown.Item className="user-menu__item">
-                        <div className="user-menu__icon-box">
-                            <FontAwesomeIcon icon={faSuitcase} className="user-menu__icon"/>
-                        </div>
-                        Trips
+                        <Link to="/trips" className="user-menu__link">
+                            <div className="user-menu__icon-box">
+                                <FontAwesomeIcon icon={faSuitcase} className="user-menu__icon"/>
+                            </div>
+                            Trips
+                        </Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item className="user-menu__item">
+                        <Link to="/myhouses" className="user-menu__link">
+                            <div className="user-menu__icon-box">
+                                <FontAwesomeIcon icon={faHouseChimney} className="user-menu__icon"/>
+                            </div>
+                            My houses
+                        </Link>
                     </Dropdown.Item>
                     <Dropdown.Item className="user-menu__item">
                         <div className="user-menu__icon-box">

@@ -1,0 +1,42 @@
+.trips {
+    background-image: url("../../assets/search-bg.jpg");
+    background-position: center;
+    background-size: cover;
+    padding: 20px 100px;
+    height: 100vh;
+}
+.trip {
+    color: #60675B;
+    background-color: #fff;
+    display: flex;
+    height: 150px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.25);
+    align-items: center;
+}
+.trip__date {
+    border-right: 1px solid #7C9070;
+    flex-basis: 10%;
+}
+.trip__date, .trip__info, .trip__status {
+    padding-left: 30px;
+}
+.trip__day {
+    font-size: 22px;
+}
+.trip__month, .trip__year {
+
+    font-size: 12px;
+}
+.trip__info {
+    flex-basis: 65%;
+}
+.trip__status {
+    flex-basis: 15%;
+}
+.trip__name {
+    font-size: 22px;
+}
+.trip__address {
+    font-size: 12px;
+}
