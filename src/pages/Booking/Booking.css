@@ -1,0 +1,135 @@
+.booking, .success {
+    background-image: url("../../assets/search-bg.jpg");
+    background-position: center;
+    background-size: cover;
+    padding: 20px 100px;
+    height: 100vh;
+}
+.booking__wrapper, .success__wrapper {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 35px;
+    text-align: center;
+}
+.booking__headline {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+.booking__content {
+    display: flex;
+}
+.booking__calendar {
+    padding: 35px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 50%;
+}
+.booking__receipt-wrapper {
+    border-radius: 5px;
+    padding-top: 35px;
+    background-color: #F8ECCE;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 50%;
+}
+.booking__receipt {
+    width: 250px;
+}
+.booking__dates, .booking__price {
+    margin-bottom: 25px;
+}
+.booking__title {
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.booking__line {
+    margin-bottom: 5px;
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+}
+.booking__prefix {
+    font-size: 14px;
+}
+.booking__line-item {
+    font-size: 14px;
+    font-weight: 500;
+}
+.booking__button {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+}
+.react-calendar {
+    border: none;
+    width: auto;
+    font-family: Roboto;
+}
+.react-calendar__month-view__days__day--weekend {
+    color: #F7944E;
+}
+.react-calendar__tile--active:enabled:focus {
+    background-color: #7C9070;
+    color: #fff;
+}
+.react-calendar__tile--active:enabled {
+    background-color: #9CA777;
+    color: #fff;
+}
+.react-calendar__tile--now {
+    background-color: #F8ECCE;
+}
+.react-calendar__tile--now:hover {
+    background-color: red;
+}
+.success__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.success__house {
+    display: flex;
+    margin: 20px 0;
+    align-items: center;
+}
+.success__house-icon {
+    margin-right: 15px;
+}
+.success__title {
+    font-size: 22px;
+    font-weight: 500;
+}
+.success__text {
+    font-size: 18px;
+    font-weight: 500;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+.success__info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.success__contacts {
+    display: flex;
+    flex-direction: column;
+}
+.success__button {
+    width: 250px;
+    margin-bottom: 15px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+}
+.success__button--secondary {
+    background-color: #e2e2e2;
+}
+.success__button--secondary:hover {
+    background-color: #d4d4d4;
+}

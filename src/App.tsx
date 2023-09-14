@@ -14,6 +14,7 @@ import UserUpdate from "./pages/UserUpdate/UserUpdate";
 import Trips from "./pages/Trips/Trips";
 import MyHouses from "./pages/MyHouses/MyHouses";
 import Booking from "./pages/Booking/Booking";
+import BookingSuccess from "./pages/Booking/Success";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                   <Route path="/trips" element={<Trips />} />
                   <Route path="/myhouses" element={<MyHouses />} />
                   <Route path="/booking" element={<Booking />} />
+                  <Route path="/bookingSuccess" element={<BookingSuccess />} />
               </Routes>
           </div>
       </div>
