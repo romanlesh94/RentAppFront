@@ -34,10 +34,18 @@ const setPageLimit = (pageLimit: number) => {
     }
 }
 
+const setSelectedHouse = (selectedHouse: IHouse) => {
+    return {
+        type: "SET_SELECTED_HOUSE",
+        payload: selectedHouse,
+    }
+}
+
 export default {
     setCity,
     setHouses,
     setHousesTotalCount,
     setActivePage,
     setPageLimit,
+    setSelectedHouse,
 };

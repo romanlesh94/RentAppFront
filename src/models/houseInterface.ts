@@ -1,4 +1,5 @@
 export default interface IHouse {
+    id: number,
     name: string,
     description: string,
     rules: string,

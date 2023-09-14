@@ -1,8 +1,10 @@
 import {FC, useState} from "react";
 import IHouse from "../../models/houseInterface";
 import avatar from "../../assets/house-avatar.jpg";
+import {useSelector} from "react-redux";
 
-const HouseCard: FC<IHouse> = ({name, description, address, rules, price}) => {
+const HouseCard: FC<IHouse> = ({name, description, address, rules, price, id}) => {
+
     return (
         <div className="housecard">
             <div className="housecard__wrapper">

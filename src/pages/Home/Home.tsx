@@ -7,6 +7,7 @@ import {PaginationControl} from "react-bootstrap-pagination-control";
 import {useDispatch, useSelector} from "react-redux";
 import allActions from "../../redux/actions/allActions";
 import Loader from "../../components/Loader/Loader";
+import {Link} from "react-router-dom";
 
 const Home: FC = () => {
     const activePage = useSelector((state: any) => state.houseReducer.activePage);
@@ -38,6 +39,10 @@ const Home: FC = () => {
             });
     }
 
+    const handleHouseClick = (clickedHouse: IHouse) => {
+        dispatch(allActions.houseActions.setSelectedHouse(clickedHouse));
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0)
         getHouses();
@@ -50,14 +55,16 @@ const Home: FC = () => {
             { isLoading ? <Loader /> : null }
             {
                 houses.map((house: IHouse, index: number) =>
-                    <HouseCard
-                        name={house.name}
-                        description={house.description}
-                        rules={house.rules}
-                        address={house.address}
-                        price={house.price}
-                        key={index}
-                    />
+                    <Link to="/housepage" onClick={() => {handleHouseClick(house)}} key={index}>
+                        <HouseCard
+                            id={house.id}
+                            name={house.name}
+                            description={house.description}
+                            rules={house.rules}
+                            address={house.address}
+                            price={house.price}
+                        />
+                    </Link>
                 )
             }
             <div className="pagination">

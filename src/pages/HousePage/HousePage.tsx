@@ -1,24 +1,26 @@
-import React, {FC} from "react";
+import React, {FC, useEffect} from "react";
 import Search from "../../components/Search/Search";
 import house01 from "../../assets/house01.jpg";
 import house02 from "../../assets/house02.jpg";
 import house03 from "../../assets/house03.jpg";
 import {Carousel} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import {useSelector} from "react-redux";
+import IHouse from "../../models/houseInterface";
 
 const HousePage: FC = () => {
     const navigate = useNavigate();
+    const house: IHouse = useSelector((state: any) => state.houseReducer.selectedHouse);
+
+    useEffect(() => {console.log(house)});
 
     return (
         <div className="housepage">
             <Search />
             <div className="housepage__namebox">
-                <h3 className="housepage__name">Central London Studio Flat </h3>
+                <h3 className="housepage__name">{house.name}</h3>
             </div>
             <div className="housepage__wrapper">
-
-
-
                 <div className="housepage__container">
                     <Carousel className="housepage__carousel">
                         <Carousel.Item className="housepage__carousel-item">
@@ -54,15 +56,11 @@ const HousePage: FC = () => {
                     </div>
                 </div>
                 <div className="housepage__description">
-                    <p className="housepage__description-text">
-                        Located 1.3 km from Emirates Stadium, Maldron Hotel Finsbury Park, London offers 4-star accommodation in London and features a bar. Featuring a fitness centre, the 4-star hotel has air-conditioned rooms with free WiFi, each with a private bathroom. The accommodation provides room service, and luggage storage for guests.  At the hotel, every room is equipped with a desk and a flat-screen TV. At Maldron Hotel Finsbury Park, London every room comes with bed linen and towels. Languages spoken at the reception include Arabic, English, Spanish and French
-                    </p>
+                    <p className="housepage__description-text">{house.description}</p>
                 </div>
                 <div className="housepage__rules">
                     <p className="housepage__title">Rules</p>
-                    <p className="housepage__description-text">
-                        Check in is from 15.00, check-out is by 12.00 next morning. The house is pet-friendly. Smoking is not allowed. Children of any age are welcome. The minimum age for check-in is 18
-                    </p>
+                    <p className="housepage__description-text">{house.rules}</p>
                 </div>
             </div>
         </div>

@@ -1,7 +1,11 @@
 import React from "react";
 import {Calendar} from "react-calendar";
+import { useNavigate } from "react-router-dom";
 
 const Booking = () => {
+
+    const navigate = useNavigate();
+
     return (
         <div className="booking">
             <div className="booking__wrapper">
@@ -34,7 +38,7 @@ const Booking = () => {
                                     <p className="booking__line-item">2</p>
                                 </div>
                             </div>
-                            <button className="booking__button button-cta">Proceed</button>
+                            <button onClick={() => {navigate("/bookingSuccess")}} className="booking__button button-cta">Proceed</button>
                         </div>
                     </div>
                 </div>
