@@ -12,6 +12,7 @@ import {
     faSuitcase,
     faUserPen
 } from "@fortawesome/free-solid-svg-icons";
+import AuthService from "../../services/auth-service";
 
 const UserMenu = () => {
 
@@ -21,7 +22,9 @@ const UserMenu = () => {
     const navigate = useNavigate();
 
     const logOut = () => {
+        AuthService.logout();
         dispatch(allActions.userActions.logOut());
+        navigate("/login");
     }
 
     return (

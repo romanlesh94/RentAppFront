@@ -8,6 +8,8 @@ import {useDispatch, useSelector} from "react-redux";
 import allActions from "../../redux/actions/allActions";
 import Loader from "../../components/Loader/Loader";
 import {Link} from "react-router-dom";
+import api from "../../services/api";
+import {host} from "../../config";
 
 const Home: FC = () => {
     const activePage = useSelector((state: any) => state.houseReducer.activePage);
@@ -21,11 +23,11 @@ const Home: FC = () => {
 
     const getHouses = () => {
         dispatch(allActions.loaderActions.showLoader());
-        axios.get(
+        api.get(
             city ?
-                `http://localhost:5001/getHouses/pageIndex/${activePage}/pageSize/${limit}?City=${city}`
+                `${host}/getHouses/pageIndex/${activePage}/pageSize/${limit}?City=${city}`
                 :
-                `http://localhost:5001/getHouses/pageIndex/${activePage}/pageSize/${limit}`
+                `${host}/getHouses/pageIndex/${activePage}/pageSize/${limit}`
         )
             .then(response => {
                 console.log("getHouses");

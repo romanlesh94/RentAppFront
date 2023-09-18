@@ -1,11 +1,12 @@
 import React, {ChangeEvent, FC, FormEvent, useState} from "react";
-import axios from "axios";
 import Loader from "../../components/Loader/Loader";
 import {useDispatch, useSelector} from "react-redux";
 import allActions from "../../redux/actions/allActions";
-import IUser from "../../models/user";
 import { useNavigate } from "react-router-dom";
 import {Button, Form} from "react-bootstrap";
+import AuthService from "../../services/auth-service";
+import {host} from "../../config";
+import IUser from "../../models/user";
 
 const Login: FC = () => {
     const [values, setValues] = useState({
@@ -18,40 +19,28 @@ const Login: FC = () => {
     const isLoading = useSelector((state: any) => state.loaderReducer.isLoading);
     const navigate = useNavigate();
 
-
-    const handleLoginInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const name = event.currentTarget.name;
+        const value = event.currentTarget.value;
+        
         setValues((values) => ({
             ...values,
-            login: event.target.value,
-        }));
-    };
-
-    const handlePasswordInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setValues((values) => ({
-            ...values,
-            password: event.target.value,
+            [name]: value,
         }));
     };
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         dispatch(allActions.loaderActions.showLoader());
-        axios.post('http://localhost:5001/login', values)
-            .then(response => {
-                console.log("Status: ", response.status);
-                console.log("Data: ", response.data);
+        AuthService.login(values.login, values.password).then(
+            () => {
                 dispatch(allActions.loaderActions.hideLoader());
                 const user: IUser = {
                     name: values.login,
                 }
                 dispatch(allActions.userActions.setUser(user));
-                navigate("/");
-            })
-            .catch(error => {
-                console.error('Something went wrong!', error);
-                dispatch(allActions.loaderActions.hideLoader());
-        });
-        setValidated(true);
+            }
+        );
     }
 
     return (
@@ -68,7 +57,8 @@ const Login: FC = () => {
                             type="text"
                             placeholder="Enter your login"
                             value={values.login}
-                            onChange={handleLoginInputChange}
+                            name="login"
+                            onChange={handleInputChange}
                         />
                     </Form.Group>
                     <Form.Group controlId="validationCustom05">
@@ -79,7 +69,8 @@ const Login: FC = () => {
                             type="password"
                             placeholder="Enter your password"
                             value={values.password}
-                            onChange={handlePasswordInputChange}
+                            name="password"
+                            onChange={handleInputChange}
                         />
                     </Form.Group>
                     <Button type="submit" className="page__button button-cta">Submit</Button>
