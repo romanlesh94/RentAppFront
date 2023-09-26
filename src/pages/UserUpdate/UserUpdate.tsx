@@ -4,7 +4,7 @@ import {Button, Form} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import Loader from "../../components/Loader/Loader";
 import allActions from "../../redux/actions/allActions";
-import IUser from "../../models/user";
+import {IUser} from "../../models/user";
 import {useNavigate} from "react-router-dom";
 
 const UserUpdate: FC = () => {

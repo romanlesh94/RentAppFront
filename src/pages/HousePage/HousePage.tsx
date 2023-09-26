@@ -5,14 +5,30 @@ import house02 from "../../assets/house02.jpg";
 import house03 from "../../assets/house03.jpg";
 import {Carousel} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import IHouse from "../../models/houseInterface";
+import api from "../../services/api";
+import {host} from "../../config";
+import allActions from "../../redux/actions/allActions";
 
 const HousePage: FC = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const house: IHouse = useSelector((state: any) => state.houseReducer.selectedHouse);
+    const properties = useSelector((state: any) => state.houseReducer.selectedHouseProperties);
 
-    useEffect(() => {console.log(house)});
+    const getHouse = (id: number) => {
+        api.get(`${host}/getHouse/id/${id}`)
+            .then(response => {
+                dispatch(allActions.houseActions.setSelectedHouse(response.data.house));
+                dispatch(allActions.houseActions.setSelectedHouseProperties(response.data.properties));
+            })
+    }
+
+    useEffect(() => {
+        getHouse(house.id)
+    });
+
 
     return (
         <div className="housepage">
@@ -37,11 +53,16 @@ const HousePage: FC = () => {
                         <div className="housepage__highlights">
                             <p className="housepage__title">Property highlights</p>
                             <ul className="housepage__list">
-                                <li className="housepage__list-item">Free Wi-Fi</li>
+                                {
+                                    properties.map((p:any, index:number) =>
+                                        <li className="housepage__list-item" key={index}>{p.text}</li>
+                                    )
+                                }
+                                {/*<li className="housepage__list-item">Free Wi-Fi</li>
                                 <li className="housepage__list-item">Pet friendly</li>
                                 <li className="housepage__list-item">Non-smoking</li>
                                 <li className="housepage__list-item">King-size bed</li>
-                                <li className="housepage__list-item">Parking</li>
+                                <li className="housepage__list-item">Parking</li>*/}
                             </ul>
                         </div>
                         <div className="housepage__breakfast">

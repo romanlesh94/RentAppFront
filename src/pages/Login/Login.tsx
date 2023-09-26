@@ -5,8 +5,7 @@ import allActions from "../../redux/actions/allActions";
 import { useNavigate } from "react-router-dom";
 import {Button, Form} from "react-bootstrap";
 import AuthService from "../../services/auth-service";
-import {host} from "../../config";
-import IUser from "../../models/user";
+import {IUser} from "../../models/user";
 
 const Login: FC = () => {
     const [values, setValues] = useState({

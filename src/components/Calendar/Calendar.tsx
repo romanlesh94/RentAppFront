@@ -1,6 +1,6 @@
 import {FC} from "react";
 
-const Calendar: FC = () => {
+export const Calendar: FC = () => {
     return (
         <div className="calendar">
 
@@ -8,4 +8,6 @@ const Calendar: FC = () => {
     );
 }
 
-export default Calendar;
+
+
+

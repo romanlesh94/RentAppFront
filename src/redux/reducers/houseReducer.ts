@@ -5,6 +5,7 @@ let initialState = {
     limit: 3,
     activePage: 1,
     selectedHouse: {},
+    selectedHouseProperties: [],
 }
 
 const houseReducer = (state = initialState, action: any) => {
@@ -38,6 +39,11 @@ const houseReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 selectedHouse: action.payload,
+            }
+        case "SET_SELECTED_HOUSE_PROPERTIES":
+            return {
+                ...state,
+                selectedHouseProperties: action.payload,
             }
         default:
             return state;

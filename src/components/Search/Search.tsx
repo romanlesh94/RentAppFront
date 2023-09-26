@@ -15,6 +15,7 @@ const Enlist = () => {
         setCity(event.target.value);
     }
 
+
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         dispatch(allActions.houseActions.setCity(city));

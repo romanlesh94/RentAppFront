@@ -1,6 +1,14 @@
-let initialState = {
+import { IUser } from "../../models/user"
+
+
+/*export interface userStateProps {
+    user: IUser | {};
+    loggedIn: boolean;
+}*/
+
+const initialState = {
     user: {},
-    loggedIn: false,
+    loggedIn: false
 }
 
 const userReducer = (state = initialState, action: any) => {

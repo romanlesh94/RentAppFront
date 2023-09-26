@@ -40,6 +40,12 @@ const setSelectedHouse = (selectedHouse: IHouse) => {
         payload: selectedHouse,
     }
 }
+const setSelectedHouseProperties = (selectedHouseProperties: any) => {
+    return {
+        type: "SET_SELECTED_HOUSE_PROPERTIES",
+        payload: selectedHouseProperties,
+    }
+}
 
 export default {
     setCity,
@@ -48,4 +54,5 @@ export default {
     setActivePage,
     setPageLimit,
     setSelectedHouse,
+    setSelectedHouseProperties,
 };
