@@ -4,7 +4,7 @@ import house01 from "../../assets/house01.jpg";
 import house02 from "../../assets/house02.jpg";
 import house03 from "../../assets/house03.jpg";
 import {Carousel} from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import IHouse from "../../models/houseInterface";
 import api from "../../services/api";
@@ -26,7 +26,7 @@ const HousePage: FC = () => {
     }
 
     useEffect(() => {
-        getHouse(house.id)
+        getHouse(house.id);
     });
 
 

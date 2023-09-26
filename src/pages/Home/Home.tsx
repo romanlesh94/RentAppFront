@@ -57,7 +57,7 @@ const Home: FC = () => {
             { isLoading ? <Loader /> : null }
             {
                 houses.map((house: IHouse, index: number) =>
-                    <Link to="/housepage" onClick={() => {handleHouseClick(house)}} key={index}>
+                    <Link to={`/housepage/id/${house.id}`} onClick={() => {handleHouseClick(house)}} key={index}>
                         <HouseCard
                             id={house.id}
                             name={house.name}
