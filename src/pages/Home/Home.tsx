@@ -21,6 +21,7 @@ const Home: FC = () => {
 
     const dispatch = useDispatch();
 
+
     const getHouses = () => {
         dispatch(allActions.loaderActions.showLoader());
         api.get(
@@ -48,7 +49,6 @@ const Home: FC = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
         getHouses();
-        console.log("useEffect")
     }, [activePage, city]);
 
     return (

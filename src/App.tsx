@@ -27,11 +27,11 @@ function App() {
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/enlist" element={<Enlist />} />
-                  <Route path="/housepage/id/*" element={<HousePage />} />
+                  <Route path="/housepage/id/:id" element={<HousePage />} />
                   <Route path="/userUpdate" element={<UserUpdate />} />
                   <Route path="/trips" element={<Trips />} />
                   <Route path="/myhouses" element={<MyHouses />} />
-                  <Route path="/booking" element={<Booking />} />
+                  <Route path="/booking/id/:id" element={<Booking />} />
                   <Route path="/bookingSuccess" element={<BookingSuccess />} />
               </Routes>
           </div>

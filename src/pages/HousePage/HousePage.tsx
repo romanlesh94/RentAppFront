@@ -10,12 +10,16 @@ import IHouse from "../../models/houseInterface";
 import api from "../../services/api";
 import {host} from "../../config";
 import allActions from "../../redux/actions/allActions";
+import {all} from "axios";
 
 const HousePage: FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const house: IHouse = useSelector((state: any) => state.houseReducer.selectedHouse);
     const properties = useSelector((state: any) => state.houseReducer.selectedHouseProperties);
+
+    const params = useParams();
+    const houseId = Number(params.id);
 
     const getHouse = (id: number) => {
         api.get(`${host}/getHouse/id/${id}`)
@@ -26,8 +30,8 @@ const HousePage: FC = () => {
     }
 
     useEffect(() => {
-        getHouse(house.id);
-    });
+        getHouse(houseId);
+    }, []);
 
 
     return (
@@ -58,11 +62,6 @@ const HousePage: FC = () => {
                                         <li className="housepage__list-item" key={index}>{p.text}</li>
                                     )
                                 }
-                                {/*<li className="housepage__list-item">Free Wi-Fi</li>
-                                <li className="housepage__list-item">Pet friendly</li>
-                                <li className="housepage__list-item">Non-smoking</li>
-                                <li className="housepage__list-item">King-size bed</li>
-                                <li className="housepage__list-item">Parking</li>*/}
                             </ul>
                         </div>
                         <div className="housepage__breakfast">
@@ -73,7 +72,7 @@ const HousePage: FC = () => {
                             <p className="housepage__title">Transfer</p>
                             <p className="housepage__text">Transfer from the airport is possible, but not included</p>
                         </div>
-                        <button onClick={() => {navigate("/booking")}} className="housepage__button button-cta">Book</button>
+                        <button onClick={() => {navigate(`/booking/id/${houseId}`)}} className="housepage__button button-cta">Book</button>
                     </div>
                 </div>
                 <div className="housepage__description">

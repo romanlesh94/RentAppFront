@@ -1,6 +1,8 @@
-import {FC} from "react";
+import {FC, useEffect, useState} from "react";
 import IHouse from "../../models/houseInterface";
 import avatar from "../../assets/house-avatar.jpg";
+import api from "../../services/api";
+import {host} from "../../config";
 
 const HouseCard: FC<IHouse> = ({name, description, address, rules, price, id}) => {
 
