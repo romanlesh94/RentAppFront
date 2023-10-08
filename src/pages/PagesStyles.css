@@ -71,10 +71,12 @@
     display: flex;
 }
 .housecard__image-wrapper {
+    flex-basis: 20%;
     margin-right: 25px;
     padding: 25px;
 }
 .housecard__info {
+    flex-basis: 70%;
     padding: 25px 25px 25px 0;
 }
 .housecard__image {
@@ -90,9 +92,11 @@
     margin: 15px 0;
 }
 .housecard__description {
+    width: 90%;
     font-size: 14px;
 }
 .housecard__price-tag {
+    flex-basis: 10%;
     display: flex;
     flex-direction: column;
     align-items: center;

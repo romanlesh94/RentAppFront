@@ -6,6 +6,7 @@ let initialState = {
     activePage: 1,
     selectedHouse: {},
     selectedHouseProperties: [],
+    houseImages: [],
 }
 
 const houseReducer = (state = initialState, action: any) => {
@@ -44,6 +45,11 @@ const houseReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 selectedHouseProperties: action.payload,
+            }
+        case "SET_HOUSE_IMAGES":
+            return {
+                ...state,
+                houseImages: action.payload,
             }
         default:
             return state;

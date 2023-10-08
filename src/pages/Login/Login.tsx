@@ -38,6 +38,7 @@ const Login: FC = () => {
                     name: values.login,
                 }
                 dispatch(allActions.userActions.setUser(user));
+                navigate("/");
             }
         );
     }

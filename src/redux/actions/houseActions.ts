@@ -46,6 +46,12 @@ const setSelectedHouseProperties = (selectedHouseProperties: any) => {
         payload: selectedHouseProperties,
     }
 }
+const setHouseImages = (houseUrl: Array<string>) => {
+    return {
+        type: "SET_HOUSE_IMAGES",
+        payload: houseUrl,
+    }
+}
 
 export default {
     setCity,
@@ -55,4 +61,5 @@ export default {
     setPageLimit,
     setSelectedHouse,
     setSelectedHouseProperties,
+    setHouseImages
 };

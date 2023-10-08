@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from "react";
+import React, {FC, useEffect, useState} from "react";
 import Search from "../../components/Search/Search";
 import house01 from "../../assets/house01.jpg";
 import house02 from "../../assets/house02.jpg";
@@ -17,6 +17,7 @@ const HousePage: FC = () => {
     const dispatch = useDispatch();
     const house: IHouse = useSelector((state: any) => state.houseReducer.selectedHouse);
     const properties = useSelector((state: any) => state.houseReducer.selectedHouseProperties);
+    const houseImages = useSelector((state: any) => state.houseReducer.houseImages);
 
     const params = useParams();
     const houseId = Number(params.id);
@@ -29,8 +30,36 @@ const HousePage: FC = () => {
             })
     }
 
+    /*const getImages = (houseId: number) => {
+        api.get(`${host}/getHouseImages/${houseId}`)
+            .then( response => {
+                //const blob = new Blob([new Uint8Array(response.data)], { type: "image/jpeg" });
+                const blobs: Array<string> = [];
+                response.data.forEach((i: any) => {
+                    const blob = new Blob([new Uint8Array(i.fileContents)], { type: "image/jpeg" })
+                    //blobs.push(URL.createObjectURL(i.fileContents))
+                    blobs.push(URL.createObjectURL(blob));
+                });
+                //const url = URL.createObjectURL(response.data);
+                dispatch(allActions.houseActions.setHouseImages(blobs));
+            })
+            .catch(error => {
+                console.error("Error fetching image:", error);
+            });
+    }*/
+
+    const getImages = (houseId: number) => {
+        api.get(`${host}/getHouseImages/${houseId}`)
+            .then(response => {
+                const images: Array<string> = [];
+                response.data.forEach((i: any) => images.push(i.fileContents));
+                dispatch(allActions.houseActions.setHouseImages(images));
+            })
+    }
+
     useEffect(() => {
         getHouse(houseId);
+        getImages(houseId);
     }, []);
 
 
@@ -43,7 +72,14 @@ const HousePage: FC = () => {
             <div className="housepage__wrapper">
                 <div className="housepage__container">
                     <Carousel className="housepage__carousel">
-                        <Carousel.Item className="housepage__carousel-item">
+                        {
+                            houseImages.map((image: any, index: number) =>
+                                <Carousel.Item className="housepage__carousel-item">
+                                    <img src={`data:image/jpeg;base64,${image}`} alt={`housePhoto${index}`} className="housepage__photo" key={index}/>
+                                </Carousel.Item>
+                            )
+                        }
+                        {/*<Carousel.Item className="housepage__carousel-item">
                             <img src={house01} alt="housePhoto01" className="housepage__photo"/>
                         </Carousel.Item>
                         <Carousel.Item className="housepage__carousel-item">
@@ -51,7 +87,7 @@ const HousePage: FC = () => {
                         </Carousel.Item>
                         <Carousel.Item className="housepage__carousel-item">
                             <img src={house03} alt="housePhoto03" className="housepage__photo"/>
-                        </Carousel.Item>
+                        </Carousel.Item>*/}
                     </Carousel>
                     <div className="housepage__booking">
                         <div className="housepage__highlights">

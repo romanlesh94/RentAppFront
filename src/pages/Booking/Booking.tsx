@@ -99,11 +99,8 @@ const Booking: FC = () => {
         navigate("/bookingSuccess");
     }
 
-
-
     useEffect(() => {
         getBookings(houseId);
-        console.log(value);
     }, [value]);
 
 
