@@ -6,6 +6,7 @@ import Loader from "../../components/Loader/Loader";
 import allActions from "../../redux/actions/allActions";
 import {IUser} from "../../models/user";
 import {useNavigate} from "react-router-dom";
+import ISetCurrentUser from "../../models/setCurrentUserInterface";
 
 const Signup: FC = () => {
     const [values, setValues] = useState({
@@ -13,6 +14,7 @@ const Signup: FC = () => {
         password: '',
         email: '',
         country: '',
+        phoneNumber: '',
     });
     const [submitted, setSubmitted] = useState(false);
     const [validated, setValidated] = useState(false);
@@ -21,31 +23,13 @@ const Signup: FC = () => {
     const isLoading = useSelector((state: any) => state.loaderReducer.isLoading);
     const navigate = useNavigate();
 
-    const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setValues((values) => ({
-            ...values,
-            email: event.target.value,
-        }));
-    };
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const name = event.currentTarget.name;
+        const value = event.currentTarget.value;
 
-    const handleCountryInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setValues((values) => ({
             ...values,
-            country: event.target.value,
-        }));
-    };
-
-    const handleLoginInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setValues((values) => ({
-            ...values,
-            login: event.target.value,
-        }));
-    };
-
-    const handlePasswordInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setValues((values) => ({
-            ...values,
-            password: event.target.value,
+            [name]: value,
         }));
     };
 
@@ -57,8 +41,8 @@ const Signup: FC = () => {
                 dispatch(allActions.loaderActions.hideLoader());
                 console.log("Status: ", response.status);
                 console.log("Data: ", response.data);
-                const user: IUser = {
-                    name: values.login,
+                const user: ISetCurrentUser = {
+                    login: values.login,
                 }
                 dispatch(allActions.userActions.setUser(user));
                 navigate("/");
@@ -85,8 +69,8 @@ const Signup: FC = () => {
                             type="email"
                             placeholder="Enter your email"
                             value={values.email}
-                            onChange={handleEmailInputChange}
-
+                            onChange={handleInputChange}
+                            name="email"
                         />
                     </Form.Group>
                     <Form.Group controlId="validationCustom02">
@@ -97,7 +81,20 @@ const Signup: FC = () => {
                             type="text"
                             placeholder="Enter your country"
                             value={values.country}
-                            onChange={handleCountryInputChange}
+                            onChange={handleInputChange}
+                            name="country"
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="validationCustom02">
+                        <Form.Label>Telephone</Form.Label>
+                        <Form.Control
+                            className="page__input page__input--telephone"
+                            required
+                            type="text"
+                            placeholder="Enter your telephone number"
+                            value={values.phoneNumber}
+                            onChange={handleInputChange}
+                            name="phoneNumber"
                         />
                     </Form.Group>
                     <Form.Group controlId="validationCustom03">
@@ -108,7 +105,8 @@ const Signup: FC = () => {
                             type="text"
                             placeholder="Enter your login"
                             value={values.login}
-                            onChange={handleLoginInputChange}
+                            onChange={handleInputChange}
+                            name="login"
                         />
                     </Form.Group>
                     <Form.Group controlId="validationCustom04">
@@ -119,7 +117,8 @@ const Signup: FC = () => {
                             type="password"
                             placeholder="Enter your password"
                             value={values.password}
-                            onChange={handlePasswordInputChange}
+                            onChange={handleInputChange}
+                            name="password"
                         />
                     </Form.Group>
                     <Button type="submit" className="page__button button-cta">Submit</Button>

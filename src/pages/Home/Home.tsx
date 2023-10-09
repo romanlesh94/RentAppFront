@@ -65,6 +65,7 @@ const Home: FC = () => {
                             rules={house.rules}
                             address={house.address}
                             price={house.price}
+                            ownerId={house.ownerId}
                         />
                     </Link>
                 )

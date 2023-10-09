@@ -8,7 +8,7 @@ import {
     faBookmark,
     faComment,
     faHouseChimney,
-    faRightFromBracket,
+    faRightFromBracket, faSquarePlus,
     faSuitcase,
     faUserPen
 } from "@fortawesome/free-solid-svg-icons";
@@ -16,7 +16,7 @@ import AuthService from "../../services/auth-service";
 
 const UserMenu = () => {
 
-    const name = useSelector((state: any) => state.userReducer.user.name);
+    const login = useSelector((state: any) => state.userReducer.user.login);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -24,14 +24,14 @@ const UserMenu = () => {
     const logOut = () => {
         AuthService.logout();
         dispatch(allActions.userActions.logOut());
-        navigate("/login");
+        window.location.href="/";
     }
 
     return (
         <div>
             <Dropdown className="user-menu">
                 <Dropdown.Toggle className="user-menu__button" variant="danger" id="dropdown-basic">
-                    {name}
+                    {login}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className="user-menu__dropdown">
@@ -59,7 +59,7 @@ const UserMenu = () => {
                             My houses
                         </Link>
                     </Dropdown.Item>
-                    <Dropdown.Item className="user-menu__item">
+                    {/*<Dropdown.Item className="user-menu__item">
                         <div className="user-menu__icon-box">
                             <FontAwesomeIcon icon={faComment} className="user-menu__icon"/>
                         </div>
@@ -70,6 +70,14 @@ const UserMenu = () => {
                             <FontAwesomeIcon icon={faBookmark} className="user-menu__icon"/>
                         </div>
                         Saved
+                    </Dropdown.Item>*/}
+                    <Dropdown.Item className="user-menu__item">
+                        <Link to="/enlist" className="user-menu__link">
+                            <div className="user-menu__icon-box">
+                                <FontAwesomeIcon icon={faSquarePlus} className="user-menu__icon"/>
+                            </div>
+                            Enlist your house
+                        </Link>
                     </Dropdown.Item>
                     <Dropdown.Item onClick={logOut} className="user-menu__item">
                         <div className="user-menu__icon-box">

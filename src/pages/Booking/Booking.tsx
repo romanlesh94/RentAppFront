@@ -8,14 +8,12 @@ import {useDispatch, useSelector} from "react-redux";
 import allActions from "../../redux/actions/allActions";
 import IAddBooking from "../../models/addBookingInterface";
 
-/*type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece]*/
-
 const Booking: FC = () => {
 
     const bookings = useSelector((state: any) => state.bookingReducer.bookings);
     const dates = useSelector((state: any) => state.bookingReducer.dates);
     const selectedHouse = useSelector((state: any) => state.houseReducer.selectedHouse);
+    const currentUserId = localStorage.getItem("id");
     const dispatch = useDispatch();
     const params = useParams();
     const houseId = Number(params.id);
@@ -40,7 +38,6 @@ const Booking: FC = () => {
                         dates.push(formattedDate);
                         startDate.setDate(startDate.getDate() + 1);
                     }
-                    //dates.push(b.checkInDate.split("T")[0])
                 });
                 dispatch(allActions.bookingActions.setDates(dates));
                 console.log(dates);
@@ -65,7 +62,10 @@ const Booking: FC = () => {
     }
 
     const handleBookingSubmit = () => {
-        debugger
+        if(!localStorage.getItem("token")){
+            navigate("/login");
+            return
+        }
 
         const options: any  = { timezone: 'UTC', year: 'numeric', month: 'numeric', day: 'numeric' };
 
@@ -79,7 +79,7 @@ const Booking: FC = () => {
         const booking: IAddBooking = {
             id: 0,
             houseId: houseId,
-            guestId: 7,
+            guestId: Number(currentUserId),
             price: selectedHouse.price,
             checkInDate: utcCheckInDate,
             checkOutDate: utcCheckOutDate,

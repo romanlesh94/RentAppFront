@@ -1,6 +1,7 @@
 import {IUser} from "../../models/user";
+import ISetCurrentUser from "../../models/setCurrentUserInterface";
 
-const setUser = (user: IUser) => {
+const setUser = (user: ISetCurrentUser) => {
     return {
         type: "SET_USER",
         payload: user,

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import {Button, Form} from "react-bootstrap";
 import AuthService from "../../services/auth-service";
 import {IUser} from "../../models/user";
+import ISetCurrentUser from "../../models/setCurrentUserInterface";
 
 const Login: FC = () => {
     const [values, setValues] = useState({
@@ -34,8 +35,8 @@ const Login: FC = () => {
         AuthService.login(values.login, values.password).then(
             () => {
                 dispatch(allActions.loaderActions.hideLoader());
-                const user: IUser = {
-                    name: values.login,
+                const user: ISetCurrentUser = {
+                    login: values.login,
                 }
                 dispatch(allActions.userActions.setUser(user));
                 navigate("/");

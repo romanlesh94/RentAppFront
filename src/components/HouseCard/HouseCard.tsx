@@ -4,7 +4,7 @@ import avatar from "../../assets/house-avatar.jpg";
 import api from "../../services/api";
 import {host} from "../../config";
 
-const HouseCard: FC<IHouse> = ({name, description, address, rules, price, id}) => {
+const HouseCard: FC<IHouse> = ({name, description, address, rules, price, id, ownerId}) => {
 
     return (
         <div className="housecard">

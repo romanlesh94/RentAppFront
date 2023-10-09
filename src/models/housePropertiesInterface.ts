@@ -6,4 +6,5 @@ export default interface IHouseProperties {
     address: string,
     price: number,
     properties: Array<number>,
+    ownerId: number
 }

@@ -6,6 +6,7 @@ import Loader from "../../components/Loader/Loader";
 import allActions from "../../redux/actions/allActions";
 import {IUser} from "../../models/user";
 import {useNavigate} from "react-router-dom";
+import ISetCurrentUser from "../../models/setCurrentUserInterface";
 
 const UserUpdate: FC = () => {
     const [values, setValues] = useState({
@@ -57,8 +58,8 @@ const UserUpdate: FC = () => {
                 dispatch(allActions.loaderActions.hideLoader());
                 console.log("Status: ", response.status);
                 console.log("Data: ", response.data);
-                const user: IUser = {
-                    name: values.login,
+                const user: ISetCurrentUser = {
+                    login: values.login,
                 }
                 dispatch(allActions.userActions.setUser(user));
                 navigate("/");

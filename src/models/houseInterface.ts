@@ -5,4 +5,5 @@ export default interface IHouse {
     rules: string,
     address: string,
     price: number,
+    ownerId: number
 }

@@ -1,12 +1,37 @@
 import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import UserMenu from "./UserMenu";
 import avatar from "../../assets/user-avatar.jpeg";
+import api from "../../services/api";
+import {host} from "../../config";
+import allActions from "../../redux/actions/allActions";
 
 const Header = () => {
 
     const isLogged = useSelector((state: any) => state.userReducer.loggedIn);
+    const dispatch = useDispatch();
+    const currentUserID = localStorage.getItem("id");
+    const currentUser = useSelector((state: any) => state.userReducer.user);
+
+
+    const getCurrentUser = (id: number) => {
+        dispatch(allActions.loaderActions.showLoader());
+        api.get(`${host}/getPerson/${id}`)
+            .then(response => {
+                dispatch(allActions.userActions.setUser(response.data));
+                console.log(response.data);
+                console.log(currentUser);
+            })
+            .catch(error => {
+                console.error("Something went wrong", error);
+                dispatch(allActions.loaderActions.hideLoader());
+            })
+    }
+
+    useEffect(() => {
+        getCurrentUser(Number(currentUserID));
+    }, []);
 
     return (
         <div className="header">
@@ -32,11 +57,6 @@ const Header = () => {
                             <Link to="/signup">
                                 <div className="header__menu-item header__signup">
                                     Register
-                                </div>
-                            </Link>
-                            <Link to="/enlist">
-                                <div className="header__menu-item header__enlist-house">
-                                    List your house
                                 </div>
                             </Link>
                         </div>

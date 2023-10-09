@@ -7,7 +7,6 @@ import allActions from "../../redux/actions/allActions";
 import api from "../../services/api";
 import {host} from "../../config";
 import IHouseProperties from "../../models/housePropertiesInterface";
-import IHouse from "../../models/houseInterface";
 
 const Enlist: FC = () => {
     const [values, setValues] = useState({
@@ -67,6 +66,7 @@ const Enlist: FC = () => {
             address: values.address,
             price: parseInt(values.price, 10),
             properties: checkboxValues,
+            ownerId: Number(localStorage.getItem("id")),
         }
         console.log(house);
         dispatch(allActions.loaderActions.showLoader());
