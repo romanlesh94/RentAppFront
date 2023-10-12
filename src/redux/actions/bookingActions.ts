@@ -1,4 +1,5 @@
 import IBooking from "../../models/bookingInterface";
+import ITrip from "../../models/tripInterface";
 
 const setBookings = (bookings: Array<IBooking>) => {
     return {
@@ -12,8 +13,15 @@ const setDates = (dates: Array<Date>) => {
         payload: dates,
     }
 }
+const setUpcomingTrips = (trips: Array<ITrip>) => {
+    return {
+        type: "SET_UPCOMING_TRIPS",
+        payload: trips,
+    }
+}
 
 export default {
     setBookings,
-    setDates
+    setDates,
+    setUpcomingTrips,
 }

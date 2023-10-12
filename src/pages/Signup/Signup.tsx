@@ -43,6 +43,9 @@ const Signup: FC = () => {
                 console.log("Data: ", response.data);
                 const user: ISetCurrentUser = {
                     login: values.login,
+                    country: values.country,
+                    email: values.email,
+                    phoneNumber: values.phoneNumber
                 }
                 dispatch(allActions.userActions.setUser(user));
                 navigate("/");

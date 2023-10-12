@@ -11,7 +11,7 @@ const Header = () => {
 
     const isLogged = useSelector((state: any) => state.userReducer.loggedIn);
     const dispatch = useDispatch();
-    const currentUserID = localStorage.getItem("id");
+    const currentUserId = localStorage.getItem("id");
     const currentUser = useSelector((state: any) => state.userReducer.user);
 
 
@@ -30,7 +30,7 @@ const Header = () => {
     }
 
     useEffect(() => {
-        getCurrentUser(Number(currentUserID));
+        getCurrentUser(Number(currentUserId));
     }, []);
 
     return (

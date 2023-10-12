@@ -35,7 +35,7 @@ const Login: FC = () => {
         AuthService.login(values.login, values.password).then(
             () => {
                 dispatch(allActions.loaderActions.hideLoader());
-                const user: ISetCurrentUser = {
+                const user: IUser = {
                     login: values.login,
                 }
                 dispatch(allActions.userActions.setUser(user));

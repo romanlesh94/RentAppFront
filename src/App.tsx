@@ -10,11 +10,12 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import Enlist from "./pages/Enlist/Enlist";
 import HousePage from "./pages/HousePage/HousePage";
-import UserUpdate from "./pages/UserUpdate/UserUpdate";
 import Trips from "./pages/Trips/Trips";
 import MyHouses from "./pages/MyHouses/MyHouses";
 import Booking from "./pages/Booking/Booking";
 import BookingSuccess from "./pages/Booking/Success";
+import UserUpdate from "./pages/UserUpdate/UserUpdate";
+import HouseUpdate from "./pages/HouseUpdate/HouseUpdate";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
                   <Route path="/myhouses" element={<MyHouses />} />
                   <Route path="/booking/id/:id" element={<Booking />} />
                   <Route path="/bookingSuccess" element={<BookingSuccess />} />
+                  <Route path="/houseUpdate/id/:id" element={<HouseUpdate />} />
               </Routes>
           </div>
       </div>

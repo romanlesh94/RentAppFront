@@ -1,81 +1,73 @@
-import React, {ChangeEvent, FC, FormEvent, useState} from "react";
+import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import axios from "axios";
 import {Button, Form} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import Loader from "../../components/Loader/Loader";
 import allActions from "../../redux/actions/allActions";
-import {IUser} from "../../models/user";
 import {useNavigate} from "react-router-dom";
-import ISetCurrentUser from "../../models/setCurrentUserInterface";
 
-const UserUpdate: FC = () => {
+const UserUpdate = () => {
+
+    const [validated, setValidated] = useState(false);
+    const user = useSelector((state: any) => state.userReducer.user);
     const [values, setValues] = useState({
         login: '',
         password: '',
         email: '',
         country: '',
+        phoneNumber: '',
     });
-    const [submitted, setSubmitted] = useState(false);
-    const [validated, setValidated] = useState(false);
-
-    const dispatch = useDispatch();
     const isLoading = useSelector((state: any) => state.loaderReducer.isLoading);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    useEffect(() => {
         setValues((values) => ({
             ...values,
-            email: event.target.value,
+            login: user.login,
+            email: user.email,
+            country: user.country,
+            phoneNumber: user.phoneNumber
         }));
-    };
+    }, [user])
 
-    const handleCountryInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setValues((values) => ({
-            ...values,
-            country: event.target.value,
-        }));
-    };
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const name = event.currentTarget.name;
+        const value = event.currentTarget.value;
 
-    const handleLoginInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setValues((values) => ({
             ...values,
-            login: event.target.value,
+            [name]: value,
         }));
-    };
-
-    const handlePasswordInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setValues((values) => ({
-            ...values,
-            password: event.target.value,
-        }));
+        console.log(value);
     };
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         dispatch(allActions.loaderActions.showLoader());
-        axios.post('http://localhost:5001/signup', values)
+        const person = {
+            id: Number(localStorage.getItem("id")),
+            login: values.login,
+            email: values.email,
+            country: values.country,
+            phoneNumber: values.phoneNumber,
+        }
+        axios.post('http://localhost:5001/updatePerson', person)
             .then(response => {
                 dispatch(allActions.loaderActions.hideLoader());
                 console.log("Status: ", response.status);
                 console.log("Data: ", response.data);
-                const user: ISetCurrentUser = {
-                    login: values.login,
-                }
-                dispatch(allActions.userActions.setUser(user));
+                dispatch(allActions.userActions.setUser(person));
                 navigate("/");
             })
             .catch(error => {
                 dispatch(allActions.loaderActions.hideLoader());
                 console.error('Something went wrong!', error);
-        });
-        setValidated(true);
-        setSubmitted(true);
+            });
     }
 
     return (
         <div className="page">
             <div className="page__container">
-                { isLoading ? <Loader /> : null }
                 <Form noValidate validated={validated} className="page__form" onSubmit={handleSubmit}>
                     <h3 className="page__headline">Update your personal data</h3>
                     <Form.Group controlId="validationCustom01">
@@ -86,8 +78,8 @@ const UserUpdate: FC = () => {
                             type="email"
                             placeholder="Enter your email"
                             value={values.email}
-                            onChange={handleEmailInputChange}
-
+                            onChange={handleInputChange}
+                            name="email"
                         />
                     </Form.Group>
                     <Form.Group controlId="validationCustom02">
@@ -98,7 +90,8 @@ const UserUpdate: FC = () => {
                             type="text"
                             placeholder="Enter your country"
                             value={values.country}
-                            onChange={handleCountryInputChange}
+                            onChange={handleInputChange}
+                            name="country"
                         />
                     </Form.Group>
                     <Form.Group controlId="validationCustom03">
@@ -109,18 +102,20 @@ const UserUpdate: FC = () => {
                             type="text"
                             placeholder="Enter your login"
                             value={values.login}
-                            onChange={handleLoginInputChange}
+                            onChange={handleInputChange}
+                            name="login"
                         />
                     </Form.Group>
                     <Form.Group controlId="validationCustom04">
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label>Phone number</Form.Label>
                         <Form.Control
-                            className="page__input page__input--password-check"
+                            className="page__input page__input--telephone"
                             required
-                            type="password"
+                            type="text"
                             placeholder="Enter your password"
-                            value={values.password}
-                            onChange={handlePasswordInputChange}
+                            value={values.phoneNumber}
+                            onChange={handleInputChange}
+                            name="phoneNumber"
                         />
                     </Form.Group>
                     <Button type="submit" className="page__button button-cta">Submit</Button>
