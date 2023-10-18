@@ -4,6 +4,7 @@ import allActions from "../../redux/actions/allActions";
 import api from "../../services/api";
 import {host} from "../../config";
 import ITrip from "../../models/tripInterface";
+import TripsMenu from "./TripsMenu";
 
 const Trips: FC = () => {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const Trips: FC = () => {
         api.get(`${host}/getBookingsByGuest/${id}`)
             .then(response => {
                 dispatch(allActions.bookingActions.setUpcomingTrips(response.data));
+                console.log(response.data);
             })
             .catch(error => {
                 console.error("Something went wrong", error);
@@ -28,6 +30,7 @@ const Trips: FC = () => {
 
     return (
         <div className="trips">
+            <p className="trips__page-title">Your upcoming trips:</p>
             {
                 trips.map((trip: ITrip, index: number) =>
                     <div className="trip" key={index}>
@@ -45,6 +48,18 @@ const Trips: FC = () => {
                         </div>
                         <div className="trip__status">
                             <p className="trip__status-text">Booked</p>
+                        </div>
+                        <div className="trip__menu">
+                            <TripsMenu
+                                id={trip.id}
+                                houseId={trip.houseId}
+                                guestId={trip.guestId}
+                                price={trip.price}
+                                checkInDate={trip.checkInDate}
+                                checkOutDate={trip.checkOutDate}
+                                houseName={trip.houseName}
+                                houseAddress={trip.houseAddress}
+                            />
                         </div>
                     </div>
                 )

@@ -82,10 +82,6 @@ const HouseUpdate: FC = () => {
             });
     }*/
 
-    useEffect(() => {
-        //getHouseProperties();
-    }, []);
-
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
 

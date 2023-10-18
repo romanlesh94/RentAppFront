@@ -59,6 +59,14 @@
     color: #ffffff;
 }
 
+.page__code-inputs {
+    display: flex;
+}
+.page__code-input {
+    width: 70px;
+    height: 70px;
+}
+
 /* HOUSECARD STYLES */
 
 .housecard {

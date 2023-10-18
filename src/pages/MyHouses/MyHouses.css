@@ -25,3 +25,10 @@
 .my-house__address {
     font-size: 12px;
 }
+.my-houses__title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: #60675B;
+}

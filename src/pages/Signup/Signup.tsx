@@ -48,7 +48,8 @@ const Signup: FC = () => {
                     phoneNumber: values.phoneNumber
                 }
                 dispatch(allActions.userActions.setUser(user));
-                navigate("/");
+                localStorage.setItem("id", response.data);
+                navigate("/verify");
             })
             .catch(error => {
                 dispatch(allActions.loaderActions.hideLoader());

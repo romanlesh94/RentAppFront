@@ -30,6 +30,7 @@ const MyHouses: FC = () => {
 
     return (
         <div className="my-houses">
+            <p className="my-houses__title">Your houses:</p>
             {
                 houses.map((house: IHouse, index: number) =>
                     <div className="my-house" key={index}>

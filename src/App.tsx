@@ -16,6 +16,8 @@ import Booking from "./pages/Booking/Booking";
 import BookingSuccess from "./pages/Booking/Success";
 import UserUpdate from "./pages/UserUpdate/UserUpdate";
 import HouseUpdate from "./pages/HouseUpdate/HouseUpdate";
+import AddHouseImage from "./pages/AddHouseImage/AddHouseImage";
+import PhoneVerification from "./pages/Signup/PhoneVerification";
 
 
 function App() {
@@ -27,6 +29,7 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Signup />} />
+                  <Route path="/verify" element={<PhoneVerification />} />
                   <Route path="/enlist" element={<Enlist />} />
                   <Route path="/housepage/id/:id" element={<HousePage />} />
                   <Route path="/userUpdate" element={<UserUpdate />} />
@@ -35,6 +38,7 @@ function App() {
                   <Route path="/booking/id/:id" element={<Booking />} />
                   <Route path="/bookingSuccess" element={<BookingSuccess />} />
                   <Route path="/houseUpdate/id/:id" element={<HouseUpdate />} />
+                  <Route path="/addHouseImage" element={< AddHouseImage/>} />
               </Routes>
           </div>
       </div>
