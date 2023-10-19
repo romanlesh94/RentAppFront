@@ -1,14 +1,12 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import React, {FC} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPen, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import api from "../../services/api";
 import {host} from "../../config";
-import IHouse from "../../models/houseInterface";
 import {useDispatch, useSelector} from "react-redux";
 import allActions from "../../redux/actions/allActions";
 import {useNavigate} from 'react-router-dom';
-import {all} from "axios";
 import ITrip from "../../models/tripInterface";
 
 const TripsMenu: FC<ITrip> = ({id, houseAddress, houseName, checkOutDate, checkInDate, price, houseId, guestId}) => {

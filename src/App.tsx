@@ -18,6 +18,7 @@ import UserUpdate from "./pages/UserUpdate/UserUpdate";
 import HouseUpdate from "./pages/HouseUpdate/HouseUpdate";
 import AddHouseImage from "./pages/AddHouseImage/AddHouseImage";
 import PhoneVerification from "./pages/Signup/PhoneVerification";
+import TripsHistory from "./pages/Trips/TripsHistory";
 
 
 function App() {
@@ -34,11 +35,12 @@ function App() {
                   <Route path="/housepage/id/:id" element={<HousePage />} />
                   <Route path="/userUpdate" element={<UserUpdate />} />
                   <Route path="/trips" element={<Trips />} />
+                  <Route path="/tripsHistory" element={<TripsHistory />} />
                   <Route path="/myhouses" element={<MyHouses />} />
                   <Route path="/booking/id/:id" element={<Booking />} />
                   <Route path="/bookingSuccess" element={<BookingSuccess />} />
                   <Route path="/houseUpdate/id/:id" element={<HouseUpdate />} />
-                  <Route path="/addHouseImage" element={< AddHouseImage/>} />
+                  <Route path="/addHouseImage/id/:id" element={< AddHouseImage/>} />
               </Routes>
           </div>
       </div>

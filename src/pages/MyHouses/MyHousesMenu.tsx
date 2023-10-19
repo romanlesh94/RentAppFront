@@ -1,7 +1,7 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import React, {FC} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPen, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faPen, faSquarePlus, faTrash} from "@fortawesome/free-solid-svg-icons";
 import api from "../../services/api";
 import {host} from "../../config";
 import IHouse from "../../models/houseInterface";
@@ -54,6 +54,12 @@ const MyHousesMenu: FC<IHouse> = ({name, description, address, rules, price, id,
                             <FontAwesomeIcon icon={faTrash} className="user-menu__icon"/>
                         </div>
                         Delete house
+                    </Dropdown.Item>
+                    <Dropdown.Item className="user-menu__item" onClick={() => navigate(`/addHouseImage/id/${id}`)}>
+                        <div className="user-menu__icon-box">
+                            <FontAwesomeIcon icon={faSquarePlus} className="user-menu__icon"/>
+                        </div>
+                        Add House Image
                     </Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>

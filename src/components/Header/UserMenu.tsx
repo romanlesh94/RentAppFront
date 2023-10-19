@@ -65,12 +65,7 @@ const UserMenu = () => {
                         </div>
                         Reviews
                     </Dropdown.Item>
-                    <Dropdown.Item className="user-menu__item">
-                        <div className="user-menu__icon-box">
-                            <FontAwesomeIcon icon={faBookmark} className="user-menu__icon"/>
-                        </div>
-                        Saved
-                    </Dropdown.Item>*/}
+                    */}
                     <Dropdown.Item className="user-menu__item">
                         <Link to="/enlist" className="user-menu__link">
                             <div className="user-menu__icon-box">
@@ -78,6 +73,12 @@ const UserMenu = () => {
                             </div>
                             Enlist your house
                         </Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item className="user-menu__item" onClick={ ()=> navigate("/tripsHistory") }>
+                        <div className="user-menu__icon-box">
+                            <FontAwesomeIcon icon={faBookmark} className="user-menu__icon"/>
+                        </div>
+                        History
                     </Dropdown.Item>
                     <Dropdown.Item onClick={logOut} className="user-menu__item">
                         <div className="user-menu__icon-box">

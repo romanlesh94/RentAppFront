@@ -7,6 +7,7 @@ import allActions from "../../redux/actions/allActions";
 import api from "../../services/api";
 import {host} from "../../config";
 import IHouseProperties from "../../models/housePropertiesInterface";
+import { useNavigate } from "react-router-dom";
 
 const Enlist: FC = () => {
     const [values, setValues] = useState({
@@ -21,6 +22,7 @@ const Enlist: FC = () => {
     const [checkboxValues, setCheckboxValues] = useState<number[]>([]);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const isLoading = useSelector((state: any) => state.loaderReducer.isLoading);
 
     const handleCheckboxChange = (value: number) => {
@@ -81,6 +83,7 @@ const Enlist: FC = () => {
                 console.error('Something went wrong!', error);
         });
         setValidated(true);
+        navigate("/addHouseImage");
     }
 
     return (

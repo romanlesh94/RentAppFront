@@ -5,11 +5,15 @@ import IAddHouseImage from "../../models/addHouseImageInterface";
 import {useSelector} from "react-redux";
 import {host} from "../../config";
 import api from "../../services/api";
+import {useNavigate, useParams} from "react-router-dom";
 
 const AddHouseImage = () => {
     const [validated, setValidated] = useState(false);
     const [image, setImage] = useState<File>();
-    const selectedHouseId = useSelector((state: any) => state.houseReducer.selectedHouse.id);
+    const navigate = useNavigate();
+    const params = useParams();
+    const houseId = Number(params.id);
+
 
     const handleImageUpload  = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files as FileList;
@@ -24,7 +28,7 @@ const AddHouseImage = () => {
         let formData = new FormData();
         formData.append("file", image)
 
-        api.post(`${host}/addHouseImage/11`, formData, {
+        api.post(`${host}/addHouseImage/${houseId}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             }
@@ -35,6 +39,8 @@ const AddHouseImage = () => {
             .catch(error => {
                 console.error("Something went wrong", error);
             });
+
+        navigate("/");
     }
 
     return (
