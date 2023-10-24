@@ -5,17 +5,23 @@ import api from "../../services/api";
 import {host} from "../../config";
 import ITrip from "../../models/tripInterface";
 import TripsMenu from "./TripsMenu";
+import {Link} from "react-router-dom";
+import {PaginationControl} from "react-bootstrap-pagination-control";
 
 const Trips: FC = () => {
     const dispatch = useDispatch();
     const trips = useSelector((state: any) => state.bookingReducer.upcomingTrips);
     const currentUserId = localStorage.getItem("id");
+    const activePage = useSelector((state: any) => state.houseReducer.activePage);
+    const limit = useSelector((state: any) => state.houseReducer.limit);
+    const totalCount = useSelector((state: any) => state.houseReducer.totalCount);
 
     const getBookings = (id: number) => {
         dispatch(allActions.loaderActions.showLoader());
-        api.get(`${host}/getBookingsByGuest/${id}`)
+        api.get(`${host}/getBookingsByGuest/${id}/pageIndex/${activePage}/pageSize/${limit}`)
             .then(response => {
-                dispatch(allActions.bookingActions.setUpcomingTrips(response.data));
+                dispatch(allActions.bookingActions.setUpcomingTrips(response.data.items));
+                dispatch(allActions.houseActions.setHousesTotalCount(response.data.totalCount));
                 console.log(response.data);
             })
             .catch(error => {
@@ -26,7 +32,7 @@ const Trips: FC = () => {
 
     useEffect(() => {
         getBookings(Number(currentUserId));
-    }, [])
+    }, [activePage])
 
     return (
         <div className="trips">
@@ -43,7 +49,9 @@ const Trips: FC = () => {
                             <p className="trip__day">{trip.checkOutDate.split("T")[0]}</p>
                         </div>
                         <div className="trip__info">
-                            <p className="trip__name">{trip.houseName}</p>
+                            <Link to={`/housepage/id/${trip.houseId}`}>
+                                <p className="trip__name">{trip.houseName}</p>
+                            </Link>
                             <p className="trip__address">{trip.houseAddress}</p>
                         </div>
                         <div className="trip__status">
@@ -64,6 +72,15 @@ const Trips: FC = () => {
                     </div>
                 )
             }
+            <div className="pagination">
+                <PaginationControl
+                    total={totalCount}
+                    limit={limit}
+                    page={activePage}
+                    changePage={(page) => {
+                        dispatch(allActions.houseActions.setActivePage(page));
+                    }}/>
+            </div>
         </div>
     )
 }

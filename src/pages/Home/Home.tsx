@@ -79,6 +79,7 @@ const Home: FC = () => {
                         dispatch(allActions.houseActions.setActivePage(page));
                     }}/>
             </div>
+            
         </div>
     );
 }

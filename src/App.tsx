@@ -4,11 +4,10 @@ import 'react-calendar/dist/Calendar.css';
 import "react-datepicker/dist/react-datepicker.css";
 import './App.css';
 import Header from "./components/Header/Header";
-import {Route, Routes } from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
-import Enlist from "./pages/Enlist/Enlist";
 import HousePage from "./pages/HousePage/HousePage";
 import Trips from "./pages/Trips/Trips";
 import MyHouses from "./pages/MyHouses/MyHouses";
@@ -19,7 +18,12 @@ import HouseUpdate from "./pages/HouseUpdate/HouseUpdate";
 import AddHouseImage from "./pages/AddHouseImage/AddHouseImage";
 import PhoneVerification from "./pages/Signup/PhoneVerification";
 import TripsHistory from "./pages/Trips/TripsHistory";
-
+import Enlist from "./pages/Enlist/Enlist";
+import Footer from "./components/Footer/Footer";
+import BookingPolicy from "./pages/InfoPages/BookingPolicy";
+import Contacts from "./pages/InfoPages/Contacts";
+import FAQ from "./pages/InfoPages/FAQ";
+import AboutUs from "./pages/InfoPages/AboutUs";
 
 function App() {
   return (
@@ -40,9 +44,14 @@ function App() {
                   <Route path="/booking/id/:id" element={<Booking />} />
                   <Route path="/bookingSuccess" element={<BookingSuccess />} />
                   <Route path="/houseUpdate/id/:id" element={<HouseUpdate />} />
-                  <Route path="/addHouseImage/id/:id" element={< AddHouseImage/>} />
+                  <Route path="/addHouseImage/id/:id" element={<AddHouseImage />} />
+                  <Route path="/bookingPolicy" element={<BookingPolicy />} />
+                  <Route path="/contacts" element={<Contacts />} />
+                  <Route path="/faq" element={<FAQ />} />
+                  <Route path="/about" element={<AboutUs />} />
               </Routes>
           </div>
+          <Footer />
       </div>
   );
 }

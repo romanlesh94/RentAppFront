@@ -1,4 +1,5 @@
 @import 'components/Header/Header.css';
+@import 'components/Footer/Footer.css';
 @import 'components/Search/Search.css';
 @import 'pages/PagesStyles.css';
 @import 'components/Loader/Loader.css';
@@ -6,6 +7,7 @@
 @import 'pages/Trips/Trips.css';
 @import 'pages/MyHouses/MyHouses.css';
 @import 'pages/Booking/Booking.css';
+@import 'pages/InfoPages/InfoPages.css';
 
 body {
     font-family: Roboto;

@@ -1,0 +1,42 @@
+.info {
+    background-image: url("../../assets/search-bg.jpg");
+    background-position: center;
+    background-size: cover;
+    align-items: center;
+    mix-blend-mode: darken;
+    background-color: #7C9070;
+    padding: 20px 100px;
+    color: #60675B;
+    min-height: 100vh;
+}
+.info__container {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 40px;
+}
+.info__title {
+    text-align: center;
+    font-size: 26px;
+}
+.info__subtitle {
+    font-size: 18px;
+}
+.info__text {
+    margin-bottom: 30px;
+}
+.info__contact-box {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+}
+.info__contact {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+.info__icon {
+    margin-right: 15px;
+}
+.info__passage {
+    margin-bottom: 10px;
+}

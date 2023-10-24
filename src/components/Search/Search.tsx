@@ -2,9 +2,8 @@ import {ChangeEvent, FC, FormEvent, useState} from "react";
 import DatePicker from "react-datepicker";
 import {useDispatch, useSelector} from "react-redux";
 import allActions from "../../redux/actions/allActions";
-import axios, {all} from "axios";
 
-const Enlist = () => {
+const Search = () => {
     const [checkInDate, setCheckInDate] = useState(new Date());
     const [checkOutDate, setCheckOutDate] = useState(new Date());
     const [city, setCity] = useState("");
@@ -60,4 +59,4 @@ const Enlist = () => {
     );
 }
 
-export default Enlist;
+export default Search;

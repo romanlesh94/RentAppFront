@@ -30,30 +30,10 @@ const HousePage: FC = () => {
             })
     }
 
-    /*const getImages = (houseId: number) => {
-        api.get(`${host}/getHouseImages/${houseId}`)
-            .then( response => {
-                //const blob = new Blob([new Uint8Array(response.data)], { type: "image/jpeg" });
-                const blobs: Array<string> = [];
-                response.data.forEach((i: any) => {
-                    const blob = new Blob([new Uint8Array(i.fileContents)], { type: "image/jpeg" })
-                    //blobs.push(URL.createObjectURL(i.fileContents))
-                    blobs.push(URL.createObjectURL(blob));
-                });
-                //const url = URL.createObjectURL(response.data);
-                dispatch(allActions.houseActions.setHouseImages(blobs));
-            })
-            .catch(error => {
-                console.error("Error fetching image:", error);
-            });
-    }*/
-
     const getImages = (houseId: number) => {
         api.get(`${host}/getHouseImages/${houseId}`)
             .then(response => {
-                const images: Array<string> = [];
-                response.data.forEach((i: any) => images.push(i.fileContents));
-                dispatch(allActions.houseActions.setHouseImages(images));
+                dispatch(allActions.houseActions.setHouseImages(response.data));
             })
     }
 
@@ -75,19 +55,10 @@ const HousePage: FC = () => {
                         {
                             houseImages.map((image: any, index: number) =>
                                 <Carousel.Item className="housepage__carousel-item">
-                                    <img src={`data:image/jpeg;base64,${image}`} alt={`housePhoto${index}`} className="housepage__photo" key={index}/>
+                                    <img src={image} alt={`housePhoto${index}`} className="housepage__photo" key={index}/>
                                 </Carousel.Item>
                             )
                         }
-                        {/*<Carousel.Item className="housepage__carousel-item">
-                            <img src={house01} alt="housePhoto01" className="housepage__photo"/>
-                        </Carousel.Item>
-                        <Carousel.Item className="housepage__carousel-item">
-                            <img src={house02} alt="housePhoto02" className="housepage__photo"/>
-                        </Carousel.Item>
-                        <Carousel.Item className="housepage__carousel-item">
-                            <img src={house03} alt="housePhoto03" className="housepage__photo"/>
-                        </Carousel.Item>*/}
                     </Carousel>
                     <div className="housepage__booking">
                         <div className="housepage__highlights">

@@ -13,7 +13,8 @@ const TripsMenu: FC<ITrip> = ({id, houseAddress, houseName, checkOutDate, checkI
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const bookings = useSelector((state: any) => state.bookingReducer.bookings)
+    const bookings = useSelector((state: any) => state.bookingReducer.bookings);
+    const trips = useSelector((state: any) => state.bookingReducer.upcomingTrips);
 
     const cancelBooking = (bookingId: number) => {
         console.log(id, houseName);
@@ -22,11 +23,13 @@ const TripsMenu: FC<ITrip> = ({id, houseAddress, houseName, checkOutDate, checkI
                 console.log("Status: ", response.status);
                 console.log("Data: ", response.data);
 
-                const index = bookings.findIndex((booking: ITrip) => booking.id === bookingId);
+                /*const index = bookings.findIndex((booking: ITrip) => booking.id === bookingId);
                 if (index !== -1) {
                     bookings.splice(index, 1);
-                }
-                dispatch(allActions.bookingActions.setUpcomingTrips(bookings));
+                }*/
+                const newTrips = trips.filter((booking: ITrip) => booking.id !== bookingId);
+
+                dispatch(allActions.bookingActions.setUpcomingTrips(newTrips));
             })
     }
 

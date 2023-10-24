@@ -6,17 +6,23 @@ import {host} from "../../config";
 import allActions from "../../redux/actions/allActions";
 import IHouse from "../../models/houseInterface";
 import HouseCard from "../../components/HouseCard/HouseCard";
+import {Link} from "react-router-dom";
+import {PaginationControl} from "react-bootstrap-pagination-control";
 
 const MyHouses: FC = () => {
     const dispatch = useDispatch();
     const houses = useSelector((state: any) => state.houseReducer.houses);
     const currentUserId = localStorage.getItem("id");
+    const activePage = useSelector((state: any) => state.houseReducer.activePage);
+    const limit = useSelector((state: any) => state.houseReducer.limit);
+    const totalCount = useSelector((state: any) => state.houseReducer.totalCount);
 
     const getHouses = (id: number) => {
         dispatch(allActions.loaderActions.showLoader());
-        api.get(`${host}/getHousesByOwner/${id}`)
+        api.get(`${host}/getHousesByOwner/${id}/pageIndex/${activePage}/pageSize/${limit}`)
             .then(response => {
-                dispatch(allActions.houseActions.setHouses(response.data));
+                dispatch(allActions.houseActions.setHouses(response.data.items));
+                dispatch(allActions.houseActions.setHousesTotalCount(response.data.totalCount));
             })
             .catch(error => {
                 console.error("Something went wrong", error);
@@ -26,7 +32,7 @@ const MyHouses: FC = () => {
 
     useEffect(() => {
         getHouses(Number(currentUserId))
-    }, []);
+    }, [activePage]);
 
     return (
         <div className="my-houses">
@@ -35,7 +41,9 @@ const MyHouses: FC = () => {
                 houses.map((house: IHouse, index: number) =>
                     <div className="my-house" key={index}>
                         <div className="my-house__info">
-                            <p className="my-house__name">{house.name}</p>
+                            <Link to={`/housepage/id/${house.id}`}>
+                                <p className="my-house__name">{house.name}</p>
+                            </Link>
                             <p className="my-house__address">{house.address}</p>
                         </div>
                         <div className="my-house__menu">
@@ -52,7 +60,15 @@ const MyHouses: FC = () => {
                     </div>
                 )
             }
-
+            <div className="pagination">
+                <PaginationControl
+                    total={totalCount}
+                    limit={limit}
+                    page={activePage}
+                    changePage={(page) => {
+                        dispatch(allActions.houseActions.setActivePage(page));
+                    }}/>
+            </div>
         </div>
     )
 }

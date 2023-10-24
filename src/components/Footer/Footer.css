@@ -1,0 +1,19 @@
+.footer {
+    height: 80px;
+    background-color: #60675B;
+    color: #ffffff;
+    padding: 0 100px;
+    font-size: 14px;
+}
+.footer__container {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.footer__list {
+    display: flex;
+}
+.footer__list-item {
+    margin-right: 50px;
+}

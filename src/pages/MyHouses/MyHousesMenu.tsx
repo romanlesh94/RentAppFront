@@ -22,11 +22,13 @@ const MyHousesMenu: FC<IHouse> = ({name, description, address, rules, price, id,
                 console.log("Status: ", response.status);
                 console.log("Data: ", response.data);
 
-                const index = houses.findIndex((house: IHouse) => house.id === id);
+                /*const index = houses.findIndex((house: IHouse) => house.id === id);
                 if (index !== -1) {
                     houses.splice(index, 1);
-                }
-                dispatch(allActions.houseActions.setHouses(houses));
+                }*/
+
+                const newHouses = houses.filter((house: IHouse) => house.id !== id);
+                dispatch(allActions.houseActions.setHouses(newHouses));
             })
             .catch(error => {
                 console.error('Something went wrong!', error);

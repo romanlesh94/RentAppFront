@@ -11,7 +11,6 @@ const UserUpdate = () => {
     const user = useSelector((state: any) => state.userReducer.user);
     const [values, setValues] = useState({
         login: '',
-        password: '',
         email: '',
         country: '',
         phoneNumber: '',
