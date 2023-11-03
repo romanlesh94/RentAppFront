@@ -46,7 +46,8 @@ const Signup: FC = () => {
                                     login: values.login,
                                     country: values.country,
                                     email: values.email,
-                                    phoneNumber: values.phoneNumber
+                                    phoneNumber: values.phoneNumber,
+                                    imageUrl: null
                                 }
                                 dispatch(allActions.userActions.setUser(user));
                                 localStorage.setItem("id", response.data);

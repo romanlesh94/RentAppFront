@@ -45,7 +45,11 @@ const Header = () => {
                     isLogged ?
                         <div className="header__user">
                             <UserMenu />
-                            <img src={avatar} alt="user-photo" className="header__user-photo"/>
+                            <img
+                                src={currentUser.imageUrl ? currentUser.imageUrl : avatar}
+                                alt="user-photo"
+                                className="header__user-photo"
+                            />
                         </div>
                     :
                         <div className="header__menu">
