@@ -1,12 +1,17 @@
-import {ChangeEvent, FC, FormEvent, useState} from "react";
-import DatePicker from "react-datepicker";
-import {useDispatch, useSelector} from "react-redux";
+import React, {ChangeEvent, FormEvent, useState} from "react";
+import {useDispatch} from "react-redux";
 import allActions from "../../redux/actions/allActions";
+import {Calendar} from "react-calendar";
+import {DropdownButton} from "react-bootstrap";
 
 const Search = () => {
-    const [checkInDate, setCheckInDate] = useState(new Date());
-    const [checkOutDate, setCheckOutDate] = useState(new Date());
+    const [checkInDate, setCheckInDate] = useState<any>(null);
+    const [checkOutDate, setCheckOutDate] = useState<any>(null);
     const [city, setCity] = useState("");
+
+    let minCheckOutDate = new Date(checkInDate);
+    minCheckOutDate.setDate(checkInDate?.getDate() + 1);
+    const options: any = {timezone: 'UTC', year: 'numeric', month: 'numeric', day: 'numeric'};
 
     const dispatch = useDispatch();
 
@@ -18,7 +23,15 @@ const Search = () => {
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         dispatch(allActions.houseActions.setCity(city));
+
+        const utcCheckInDate = checkInDate?.toLocaleString('en-US', options);
+        const utcCheckOutDate = checkOutDate?.toLocaleString('en-US', options);
+
+        dispatch(allActions.houseActions.setCheckInDate(utcCheckInDate));
+        dispatch(allActions.houseActions.setCheckOutDate(utcCheckOutDate));
+
         dispatch(allActions.houseActions.setActivePage(1));
+        console.log(utcCheckInDate, utcCheckOutDate);
     }
 
     return (
@@ -33,20 +46,41 @@ const Search = () => {
                     />
                     <div className="search__form-buttons">
                         <div className="search__form-button">
-                            <DatePicker
-                                selected={checkInDate}
-                                onChange={(date:Date) => setCheckInDate(date)}
-                            />
+                            <DropdownButton
+                                variant="success"
+                                id="search__dropdown-basic"
+                                title={checkInDate ? checkInDate.toLocaleString('en-US', options) : "Check In"}
+                            >
+                                <Calendar
+                                    minDetail="year"
+                                    minDate={new Date()}
+                                    maxDetail="month"
+                                    selectRange={false}
+                                    onChange={setCheckInDate}
+                                    value={checkInDate}
+                                    locale={"en-EN"}
+                                />
+                            </DropdownButton>
                         </div>
-                        {/*<button className="search__form-button search__check-in">Check in</button>*/}
                         <div className="search__form-button">
-                            <DatePicker
-                                selected={checkOutDate}
-                                onChange={(date:Date) => setCheckOutDate(date)}
-                            />
+                            <DropdownButton
+                                variant="success"
+                                id="search__dropdown-basic"
+                                title={checkOutDate ? checkOutDate.toLocaleString('en-US', options) : "Check Out"}
+                                disabled={checkInDate == null ? true : false}
+                            >
+                                <Calendar
+                                    minDetail="year"
+                                    maxDetail="month"
+                                    minDate={minCheckOutDate ? minCheckOutDate : undefined}
+                                    selectRange={false}
+                                    onChange={setCheckOutDate}
+                                    value={checkOutDate}
+                                    locale={"en-EN"}
+                                />
+                            </DropdownButton>
                         </div>
-                        {/*<button className="search__form-button search__check-out">Check out</button>*/}
-                        <button className="search__form-button search__guests">Guests</button>
+                        {/*<button className="search__form-button search__guests">Guests</button>*/}
                         <input
                             type="submit"
                             value="Search"

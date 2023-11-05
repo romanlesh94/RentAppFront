@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from "react";
 import Search from "../../components/Search/Search";
-import axios from "axios";
+import axios, {AxiosRequestConfig} from "axios";
 import IHouse from "../../models/houseInterface";
 import HouseCard from "../../components/HouseCard/HouseCard";
 import {PaginationControl} from "react-bootstrap-pagination-control";
@@ -15,26 +15,40 @@ const Home: FC = () => {
     const activePage = useSelector((state: any) => state.houseReducer.activePage);
     const limit = useSelector((state: any) => state.houseReducer.limit);
     const city = useSelector((state: any) => state.houseReducer.city);
+    const checkInDate = useSelector((state: any) => state.houseReducer.checkInDate);
+    const checkOutDate = useSelector((state: any) => state.houseReducer.checkOutDate);
     const totalCount = useSelector((state: any) => state.houseReducer.totalCount);
     const houses = useSelector((state: any) => state.houseReducer.houses);
     const isLoading = useSelector((state: any) => state.loaderReducer.isLoading);
 
     const dispatch = useDispatch();
 
-
     const getHouses = () => {
         dispatch(allActions.loaderActions.showLoader());
-        api.get(
-            city ?
-                `${host}/getHouses/pageIndex/${activePage}/pageSize/${limit}?City=${city}`
-                :
-                `${host}/getHouses/pageIndex/${activePage}/pageSize/${limit}`
-        )
+
+        console.log("Booking dates: " + checkInDate, checkOutDate)
+
+        const params: Record<string, string> = {};
+        if (city) {
+            params['city'] = city;
+        }
+        if (checkInDate) {
+            params['checkInDate'] = checkInDate;
+        }
+        if (checkOutDate) {
+            params['checkOutDate'] = checkOutDate;
+        }
+
+        const config: AxiosRequestConfig = {
+            params: Object.keys(params).length > 0 ? params : undefined,
+        };
+
+        api.get(`${host}/getHouses/pageIndex/${activePage}/pageSize/${limit}`, config)
             .then(response => {
-                console.log("getHouses");
                 dispatch(allActions.houseActions.setHouses(response.data.items));
                 dispatch(allActions.houseActions.setHousesTotalCount(response.data.totalCount));
                 dispatch(allActions.loaderActions.hideLoader());
+
             })
             .catch(error => {
                 console.error("Something went wrong", error);
@@ -49,7 +63,7 @@ const Home: FC = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
         getHouses();
-    }, [activePage, city]);
+    }, [activePage, city, checkInDate, checkOutDate]);
 
     return (
         <div className="home">

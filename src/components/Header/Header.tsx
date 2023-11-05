@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import UserMenu from "./UserMenu";
 import avatar from "../../assets/user-avatar.jpeg";
@@ -13,7 +13,6 @@ const Header = () => {
     const dispatch = useDispatch();
     const currentUserId = localStorage.getItem("id");
     const currentUser = useSelector((state: any) => state.userReducer.user);
-
 
     const getCurrentUser = (id: number) => {
         dispatch(allActions.loaderActions.showLoader());
@@ -44,14 +43,14 @@ const Header = () => {
                 {
                     isLogged ?
                         <div className="header__user">
-                            <UserMenu />
+                            <UserMenu/>
                             <img
                                 src={currentUser.imageUrl ? currentUser.imageUrl : avatar}
                                 alt="user-photo"
                                 className="header__user-photo"
                             />
                         </div>
-                    :
+                        :
                         <div className="header__menu">
                             <Link to="/login">
                                 <div className="header__menu-item header__login">

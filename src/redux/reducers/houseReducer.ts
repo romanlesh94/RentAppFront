@@ -7,6 +7,8 @@ let initialState = {
     selectedHouse: {},
     selectedHouseProperties: [],
     houseImages: [],
+    checkInDate: "",
+    checkOutDate: "",
 }
 
 const houseReducer = (state = initialState, action: any) => {
@@ -50,6 +52,16 @@ const houseReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 houseImages: action.payload,
+            }
+        case "SET_CHECK_IN_DATE":
+            return {
+                ...state,
+                checkInDate: action.payload,
+            }
+        case "SET_CHECK_OUT_DATE":
+            return {
+                ...state,
+                checkOutDate: action.payload,
             }
         default:
             return state;

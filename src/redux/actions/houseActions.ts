@@ -52,6 +52,18 @@ const setHouseImages = (houseUrl: Array<string>) => {
         payload: houseUrl,
     }
 }
+const setCheckInDate = (checkInDate: string) => {
+    return {
+        type: "SET_CHECK_IN_DATE",
+        payload: checkInDate,
+    }
+}
+const setCheckOutDate = (checkOutDate: string) => {
+    return {
+        type: "SET_CHECK_OUT_DATE",
+        payload: checkOutDate,
+    }
+}
 
 export default {
     setCity,
@@ -61,5 +73,7 @@ export default {
     setPageLimit,
     setSelectedHouse,
     setSelectedHouseProperties,
-    setHouseImages
+    setHouseImages,
+    setCheckInDate,
+    setCheckOutDate
 };

@@ -75,7 +75,6 @@ const Booking: FC = () => {
         const checkOutDate = new Date(value[1]);
         const utcCheckOutDate = checkOutDate.toLocaleString('en-US', options);
 
-
         const booking: IAddBooking = {
             id: 0,
             houseId: houseId,
@@ -89,14 +88,12 @@ const Booking: FC = () => {
             .then(response => {
                 console.log("Status: ", response.status);
                 console.log("Data: ", response.data);
+                navigate("/bookingSuccess");
             })
             .catch(error => {
                 console.error('Something went wrong!', error);
             });
-
         console.log(booking.checkInDate, booking.checkOutDate);
-
-        navigate("/bookingSuccess");
     }
 
     useEffect(() => {

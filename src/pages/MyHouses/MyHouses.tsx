@@ -5,7 +5,6 @@ import api from "../../services/api";
 import {host} from "../../config";
 import allActions from "../../redux/actions/allActions";
 import IHouse from "../../models/houseInterface";
-import HouseCard from "../../components/HouseCard/HouseCard";
 import {Link} from "react-router-dom";
 import {PaginationControl} from "react-bootstrap-pagination-control";
 

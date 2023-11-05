@@ -24,6 +24,7 @@ import BookingPolicy from "./pages/InfoPages/BookingPolicy";
 import Contacts from "./pages/InfoPages/Contacts";
 import FAQ from "./pages/InfoPages/FAQ";
 import AboutUs from "./pages/InfoPages/AboutUs";
+import AddUserImage from "./pages/Signup/AddUserImage";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
                   <Route path="/bookingSuccess" element={<BookingSuccess />} />
                   <Route path="/houseUpdate/id/:id" element={<HouseUpdate />} />
                   <Route path="/addHouseImage/id/:id" element={<AddHouseImage />} />
+                  <Route path="/addUserImage/id/:id" element={<AddUserImage />} />
                   <Route path="/bookingPolicy" element={<BookingPolicy />} />
                   <Route path="/contacts" element={<Contacts />} />
                   <Route path="/faq" element={<FAQ />} />

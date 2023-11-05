@@ -9,6 +9,9 @@
 @import 'pages/Booking/Booking.css';
 @import 'pages/InfoPages/InfoPages.css';
 
+.content {
+    padding-top: 80px;
+}
 body {
     font-family: Roboto;
     box-sizing: border-box;

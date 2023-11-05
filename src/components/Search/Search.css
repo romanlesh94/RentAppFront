@@ -35,7 +35,7 @@
 .search__form-button {
     color: #fff;
     background: #7C9070;
-    flex-basis: 25%;
+    flex-basis: 33%;
     border: none;
     border-radius: 5px;
     margin-right: 5px;
@@ -61,6 +61,15 @@
 }
 .react-datepicker {
     background-color: #fff;
+}
+.dropdown {
+    height: 100%;
+}
+#search__dropdown-basic {
+    border: none;
+    background-color: inherit;
+    width: 100%;
+    height: 100%;
 }
 
 

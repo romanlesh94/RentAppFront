@@ -39,7 +39,7 @@ const Login: FC = () => {
                     login: values.login,
                 }
                 dispatch(allActions.userActions.setUser(user));
-                navigate("/");
+                window.location.href = '/';
             }
         );
     }

@@ -65,6 +65,7 @@ const PhoneVerification: FC = () => {
                         localStorage.setItem("id", response.data.id);
                     }
                 }
+                navigate(`/addUserImage/id/:${response.data.id}`)
             })
             .catch(error => {
                 dispatch(allActions.loaderActions.hideLoader());

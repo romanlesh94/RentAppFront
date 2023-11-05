@@ -44,6 +44,14 @@ const UserMenu = () => {
                         </Link>
                     </Dropdown.Item>
                     <Dropdown.Item className="user-menu__item">
+                        <Link to={`/addUserImage/id/:${localStorage.getItem("id")}`} className="user-menu__link">
+                            <div className="user-menu__icon-box">
+                                <FontAwesomeIcon icon={faUserPen} className="user-menu__icon"/>
+                            </div>
+                            Add user image
+                        </Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item className="user-menu__item">
                         <Link to="/trips" className="user-menu__link">
                             <div className="user-menu__icon-box">
                                 <FontAwesomeIcon icon={faSuitcase} className="user-menu__icon"/>
