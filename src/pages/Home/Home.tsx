@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from "react";
 import Search from "../../components/Search/Search";
-import axios, {AxiosRequestConfig} from "axios";
+import {AxiosRequestConfig} from "axios";
 import IHouse from "../../models/houseInterface";
 import HouseCard from "../../components/HouseCard/HouseCard";
 import {PaginationControl} from "react-bootstrap-pagination-control";

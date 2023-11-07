@@ -31,6 +31,7 @@ const Trips: FC = () => {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         getBookings(Number(currentUserId));
     }, [activePage])
 
