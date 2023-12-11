@@ -37,7 +37,7 @@ const Header = () => {
             <div className="header__container">
                 <Link to="/">
                     <div className="header__logo">
-                        rent
+                        rent.by
                     </div>
                 </Link>
                 {

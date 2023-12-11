@@ -8,6 +8,7 @@ import allActions from "../../redux/actions/allActions";
 import axios from "axios";
 import ISetCurrentUser from "../../models/setCurrentUserInterface";
 import api from "../../services/api";
+import {host} from "../../config";
 
 const SignupSchema = Yup.object().shape({
     login: Yup.string().min(2, "Too short!").max(100, "Too long").required("Required"),
@@ -37,7 +38,7 @@ const Signup: FC = () => {
                     }}
                     onSubmit={(values) => {
                         dispatch(allActions.loaderActions.showLoader());
-                        api.post('http://localhost:5001/signup', values)
+                        api.post(`${host}/signup`, values)
                             .then(response => {
                                 dispatch(allActions.loaderActions.hideLoader());
                                 console.log("Status: ", response.status);

@@ -92,8 +92,7 @@ const Booking: FC = () => {
             })
             .catch(error => {
                 console.error('Something went wrong!', error);
-            });
-        console.log(booking.checkInDate, booking.checkOutDate);
+            })
     }
 
     useEffect(() => {
@@ -125,14 +124,14 @@ const Booking: FC = () => {
                                 <p className="booking__dates--title booking__title">Your dates</p>
                                 <div className="booking__line">
                                     <p className="booking__prefix">Check in date:</p>
-                                    <p className="booking__line-item">{dates[0]}</p>
+                                    <p className="booking__line-item">21.11.2023</p>
                                 </div>
                                 <div className="booking__line">
                                     <p className="booking__prefix">Check out date:</p>
-                                    <p className="booking__line-item">23.09.2023</p>
+                                    <p className="booking__line-item">22.11.2023</p>
                                 </div>
                             </div>
-                            <div className="booking__price">
+                            {/*<div className="booking__price">
                                 <p className="booking__price--title booking__title">Total price</p>
                                 <div className="booking__line">
                                     <p className="booking__prefix">Price per night:</p>
@@ -142,8 +141,13 @@ const Booking: FC = () => {
                                     <p className="booking__prefix">Amount of nights:</p>
                                     <p className="booking__line-item">2</p>
                                 </div>
-                            </div>
-                            <button onClick={handleBookingSubmit} className="booking__button button-cta">Proceed</button>
+                            </div>*/}
+                            <button
+                                onClick={handleBookingSubmit}
+                                className="booking__button button-cta"
+                            >
+                                Proceed
+                            </button>
                         </div>
                     </div>
                 </div>
