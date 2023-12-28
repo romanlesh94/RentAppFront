@@ -12,7 +12,7 @@ const AddUserImage = () => {
     const [image, setImage] = useState<File>();
     const navigate = useNavigate();
     const params = useParams();
-    const userId = Number(localStorage.getItem("id"));
+    const userId = Number(sessionStorage.getItem("id"));
 
 
     const handleImageUpload  = async (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -11,7 +11,7 @@ import {PaginationControl} from "react-bootstrap-pagination-control";
 const Trips: FC = () => {
     const dispatch = useDispatch();
     const trips = useSelector((state: any) => state.bookingReducer.upcomingTrips);
-    const currentUserId = localStorage.getItem("id");
+    const currentUserId = sessionStorage.getItem("id");
     const activePage = useSelector((state: any) => state.houseReducer.activePage);
     const limit = useSelector((state: any) => state.houseReducer.limit);
     const totalCount = useSelector((state: any) => state.houseReducer.totalCount);

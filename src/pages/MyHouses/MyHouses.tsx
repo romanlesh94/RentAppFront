@@ -11,7 +11,7 @@ import {PaginationControl} from "react-bootstrap-pagination-control";
 const MyHouses: FC = () => {
     const dispatch = useDispatch();
     const houses = useSelector((state: any) => state.houseReducer.houses);
-    const currentUserId = localStorage.getItem("id");
+    const currentUserId = sessionStorage.getItem("id");
     const activePage = useSelector((state: any) => state.houseReducer.activePage);
     const limit = useSelector((state: any) => state.houseReducer.limit);
     const totalCount = useSelector((state: any) => state.houseReducer.totalCount);

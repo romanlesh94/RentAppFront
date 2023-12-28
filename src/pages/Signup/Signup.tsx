@@ -51,7 +51,7 @@ const Signup: FC = () => {
                                     imageUrl: null
                                 }
                                 dispatch(allActions.userActions.setUser(user));
-                                localStorage.setItem("id", response.data);
+                                sessionStorage.setItem("id", response.data);
                                 navigate("/verify");
                             })
                             .catch(error => {

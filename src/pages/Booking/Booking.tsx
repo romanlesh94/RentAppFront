@@ -13,7 +13,7 @@ const Booking: FC = () => {
     const bookings = useSelector((state: any) => state.bookingReducer.bookings);
     const dates = useSelector((state: any) => state.bookingReducer.dates);
     const selectedHouse = useSelector((state: any) => state.houseReducer.selectedHouse);
-    const currentUserId = localStorage.getItem("id");
+    const currentUserId = sessionStorage.getItem("id");
     const dispatch = useDispatch();
     const params = useParams();
     const houseId = Number(params.id);
@@ -62,7 +62,7 @@ const Booking: FC = () => {
     }
 
     const handleBookingSubmit = () => {
-        if(!localStorage.getItem("token")){
+        if(!sessionStorage.getItem("token")){
             navigate("/login");
             return
         }

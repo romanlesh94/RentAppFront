@@ -3,5 +3,5 @@ export default interface ISetCurrentUser{
     email: string,
     country: string,
     phoneNumber: string,
-    imageUrl: string | null
+    imageUrl: string | null,
 }

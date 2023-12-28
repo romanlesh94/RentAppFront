@@ -72,10 +72,10 @@ const Enlist: FC = () => {
                             address: values.address,
                             price: values.price,
                             properties: checkboxValues,
-                            ownerId: Number(localStorage.getItem("id")),
+                            ownerId: Number(sessionStorage.getItem("id")),
                         }
                         dispatch(allActions.loaderActions.showLoader());
-                        axios.post('http://localhost:5001/createHouse', house)
+                        api.post(`${host}/createHouse`, house)
                             .then(response => {
                                 dispatch(allActions.loaderActions.hideLoader());
                                 console.log("Status: ", response.status);

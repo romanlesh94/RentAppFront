@@ -11,7 +11,7 @@ const Header = () => {
 
     const isLogged = useSelector((state: any) => state.userReducer.loggedIn);
     const dispatch = useDispatch();
-    const currentUserId = localStorage.getItem("id");
+    const currentUserId = sessionStorage.getItem("id");
     const currentUser = useSelector((state: any) => state.userReducer.user);
 
     const getCurrentUser = (id: number) => {

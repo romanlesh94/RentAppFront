@@ -44,7 +44,7 @@ const UserUpdate = () => {
         e.preventDefault();
         dispatch(allActions.loaderActions.showLoader());
         const person = {
-            id: Number(localStorage.getItem("id")),
+            id: Number(sessionStorage.getItem("id")),
             login: values.login,
             email: values.email,
             country: values.country,

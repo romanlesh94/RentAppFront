@@ -55,15 +55,21 @@ const PhoneVerification: FC = () => {
     const handleSubmit = (e: FormEvent) => {
         const data = {
             code: digit1 + digit2 + digit3 + digit4,
-            personId: Number(localStorage.getItem("id"))
+            personId: Number(sessionStorage.getItem("id"))
         }
         api.post(`${host}/verifyPhoneNumber`, data)
             .then(response => {
-                if (response.data.token) {
-                    localStorage.setItem("token", response.data.token);
-                    if(response.data.id) {
-                        localStorage.setItem("id", response.data.id);
-                    }
+                if (response.data.authToken) {
+                    sessionStorage.setItem("token", response.data.authToken);
+                }
+                if(response.data.refreshToken) {
+                    sessionStorage.setItem("refreshToken", response.data.refreshToken);
+                }
+                if(response.data.personId) {
+                    sessionStorage.setItem("id", response.data.personId);
+                }
+                if(response.data.role) {
+                    sessionStorage.setItem("role", response.data.role);
                 }
                 navigate(`/addUserImage/id/:${response.data.id}`)
             })

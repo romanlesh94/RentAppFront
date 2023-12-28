@@ -17,7 +17,7 @@ import AuthService from "../../services/auth-service";
 const UserMenu = () => {
 
     const login = useSelector((state: any) => state.userReducer.user.login);
-
+    const role = Number(sessionStorage.getItem("role"));
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -44,7 +44,7 @@ const UserMenu = () => {
                         </Link>
                     </Dropdown.Item>
                     <Dropdown.Item className="user-menu__item">
-                        <Link to={`/addUserImage/id/:${localStorage.getItem("id")}`} className="user-menu__link">
+                        <Link to={`/addUserImage/id/:${sessionStorage.getItem("id")}`} className="user-menu__link">
                             <div className="user-menu__icon-box">
                                 <FontAwesomeIcon icon={faUserPen} className="user-menu__icon"/>
                             </div>
@@ -59,14 +59,20 @@ const UserMenu = () => {
                             Trips
                         </Link>
                     </Dropdown.Item>
-                    <Dropdown.Item className="user-menu__item">
-                        <Link to="/myhouses" className="user-menu__link">
-                            <div className="user-menu__icon-box">
-                                <FontAwesomeIcon icon={faHouseChimney} className="user-menu__icon"/>
-                            </div>
-                            My houses
-                        </Link>
-                    </Dropdown.Item>
+                    {
+                        role < 2
+                            ?
+                            <Dropdown.Item className="user-menu__item">
+                                <Link to="/myhouses" className="user-menu__link">
+                                    <div className="user-menu__icon-box">
+                                        <FontAwesomeIcon icon={faHouseChimney} className="user-menu__icon"/>
+                                    </div>
+                                    My houses
+                                </Link>
+                            </Dropdown.Item>
+                            :
+                            null
+                    }
                     {/*<Dropdown.Item className="user-menu__item">
                         <div className="user-menu__icon-box">
                             <FontAwesomeIcon icon={faComment} className="user-menu__icon"/>
@@ -74,14 +80,20 @@ const UserMenu = () => {
                         Reviews
                     </Dropdown.Item>
                     */}
-                    <Dropdown.Item className="user-menu__item">
-                        <Link to="/enlist" className="user-menu__link">
-                            <div className="user-menu__icon-box">
-                                <FontAwesomeIcon icon={faSquarePlus} className="user-menu__icon"/>
-                            </div>
-                            Enlist your house
-                        </Link>
-                    </Dropdown.Item>
+                    {
+                        role < 2
+                        ?
+                            <Dropdown.Item className="user-menu__item">
+                                <Link to="/enlist" className="user-menu__link">
+                                    <div className="user-menu__icon-box">
+                                        <FontAwesomeIcon icon={faSquarePlus} className="user-menu__icon"/>
+                                    </div>
+                                    Enlist your house
+                                </Link>
+                            </Dropdown.Item>
+                        :
+                            null
+                    }
                     <Dropdown.Item className="user-menu__item" onClick={ ()=> navigate("/tripsHistory") }>
                         <div className="user-menu__icon-box">
                             <FontAwesomeIcon icon={faBookmark} className="user-menu__icon"/>
